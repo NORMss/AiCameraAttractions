@@ -5,10 +5,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.norm.aicameraattractions.MainActivity
 import com.norm.aicameraattractions.presentation.navigator.Navigator
 
 @Composable
 fun NavGraph(
+    mainActivity: MainActivity,
     startDestination: String,
 ) {
     val navController = rememberNavController()
@@ -23,7 +25,9 @@ fun NavGraph(
             composable(
                 route = Route.NavigatorScreen.route,
             ) {
-                Navigator()
+                Navigator(
+                    activity = mainActivity,
+                )
             }
         }
     }

@@ -3,16 +3,19 @@ package com.norm.aicameraattractions.presentation.navigator
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.norm.aicameraattractions.MainActivity
 import com.norm.aicameraattractions.presentation.camera.CameraScreen
+import com.norm.aicameraattractions.presentation.camera.CameraViewModel
 import com.norm.aicameraattractions.presentation.gallery.GalleryScreen
 import com.norm.aicameraattractions.presentation.nvgarph.Route
 
 @Composable
-fun Navigator() {
+fun Navigator(activity: MainActivity) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -24,6 +27,7 @@ fun Navigator() {
             route = Route.GalleryScreen.route,
         ) {
             GalleryScreen(
+                attractions = emptyList(),
                 onOpenCamera = {
                     navigateToScreens(
                         navController = navController,
@@ -35,7 +39,12 @@ fun Navigator() {
         composable(
             route = Route.CameraScreen.route,
         ) {
+            val viewModel = hiltViewModel<CameraViewModel>()
             CameraScreen(
+                activity = activity,
+                onTakePhoto = {
+                    viewModel.onTakePhoto(it)
+                },
                 onOpenGallery = {
                     navigateToScreens(
                         navController = navController,
