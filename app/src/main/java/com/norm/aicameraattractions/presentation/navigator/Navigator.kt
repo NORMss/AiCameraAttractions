@@ -27,7 +27,7 @@ fun Navigator(activity: MainActivity) {
             route = Route.GalleryScreen.route,
         ) {
             GalleryScreen(
-                attractions = emptyList(),
+                landmarks = emptyList(),
                 onOpenCamera = {
                     navigateToScreens(
                         navController = navController,

@@ -19,14 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.norm.aicameraattractions.R
-import com.norm.aicameraattractions.model.Attraction
+import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.presentation.gallery.components.AttractionCard
-import com.norm.aicameraattractions.presentation.gallery.components.EmptyAttractionList
+import com.norm.aicameraattractions.presentation.gallery.components.EmptyLandmarksList
 import com.norm.aicameraattractions.presentation.medium_padding
 
 @Composable
 fun GalleryScreen(
-    attractions: List<Attraction>,
+    landmarks: List<Landmark>,
     onOpenCamera: () -> Unit,
 ) {
     Scaffold(
@@ -52,7 +52,7 @@ fun GalleryScreen(
             }
         }
     ) { padding ->
-        if (attractions.isNotEmpty()) {
+        if (landmarks.isNotEmpty()) {
             LazyVerticalStaggeredGrid(
                 columns = StaggeredGridCells.Fixed(2),
                 modifier = Modifier
@@ -66,14 +66,14 @@ fun GalleryScreen(
                 horizontalArrangement = Arrangement.spacedBy(medium_padding),
                 verticalItemSpacing = medium_padding,
             ) {
-                items(attractions) { item ->
+                items(landmarks) { item ->
                     AttractionCard(
-                        attraction = item,
+                        landmark = item,
                     )
                 }
             }
         } else {
-            EmptyAttractionList(
+            EmptyLandmarksList(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
@@ -85,41 +85,41 @@ fun GalleryScreen(
     }
 }
 
-val listAttractions = listOf(
-    Attraction(
+val listLandmarks = listOf(
+    Landmark(
         image = R.drawable.europe_louvre,
         description = "Louvre",
         region = "Europe"
     ),
-    Attraction(
+    Landmark(
         image = R.drawable.europe_louvre,
         description = "Louvre",
         region = "Europe"
     ),
-    Attraction(
+    Landmark(
         image = R.drawable.europe_louvre,
         description = "Louvre",
         region = "Europe"
     ),
-    Attraction(
+    Landmark(
         image = R.drawable.europe_louvre,
         description = "Louvre",
         region = "Europe"
     ),
-    Attraction(
+    Landmark(
         image = R.drawable.europe_louvre,
         description = "Louvre",
         region = "Europe"
     ),
 )
 
-val listAttractionsEmpty = emptyList<Attraction>()
+val listAttractionsEmpty = emptyList<Landmark>()
 
 @Preview
 @Composable
 fun PreviewGalleryScreen() {
     GalleryScreen(
-        attractions = listAttractions,
+        landmarks = listLandmarks,
         onOpenCamera = {
 
         }
@@ -130,7 +130,7 @@ fun PreviewGalleryScreen() {
 @Composable
 fun PreviewEmptyGalleryScreen() {
     GalleryScreen(
-        attractions = listAttractionsEmpty,
+        landmarks = listAttractionsEmpty,
         onOpenCamera = {
 
         }
