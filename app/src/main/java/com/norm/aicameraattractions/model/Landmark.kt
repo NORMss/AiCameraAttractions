@@ -1,9 +1,13 @@
 package com.norm.aicameraattractions.model
 
-import androidx.annotation.DrawableRes
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(
+    tableName = "landmarks"
+)
 data class Landmark(
-    @DrawableRes val image: Int,
-    val description: String,
+    @PrimaryKey val imagePath: String,
+    val landmarkName: String,
     val region: String,
 )

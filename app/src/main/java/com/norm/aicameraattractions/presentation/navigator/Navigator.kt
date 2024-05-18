@@ -12,6 +12,7 @@ import com.norm.aicameraattractions.MainActivity
 import com.norm.aicameraattractions.presentation.camera.CameraScreen
 import com.norm.aicameraattractions.presentation.camera.CameraViewModel
 import com.norm.aicameraattractions.presentation.gallery.GalleryScreen
+import com.norm.aicameraattractions.presentation.gallery.GalleryViewModel
 import com.norm.aicameraattractions.presentation.nvgarph.Route
 
 @Composable
@@ -26,8 +27,10 @@ fun Navigator(activity: MainActivity) {
         composable(
             route = Route.GalleryScreen.route,
         ) {
+            val viewModel = hiltViewModel<GalleryViewModel>()
+            val state = viewModel.state.value
             GalleryScreen(
-                landmarks = emptyList(),
+                landmarks = state.landmarksList,
                 onOpenCamera = {
                     navigateToScreens(
                         navController = navController,
@@ -40,6 +43,7 @@ fun Navigator(activity: MainActivity) {
             route = Route.CameraScreen.route,
         ) {
             val viewModel = hiltViewModel<CameraViewModel>()
+            val state = viewModel.state.value
             CameraScreen(
                 activity = activity,
                 onTakePhoto = {

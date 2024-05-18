@@ -49,8 +49,8 @@ class CameraRepositoryImpl @Inject constructor(
         )
     }
 
-    private suspend fun savePhoto(bitmap: Bitmap) {
-        withContext(Dispatchers.IO) {
+    private suspend fun savePhoto(bitmap: Bitmap): Uri? {
+        return withContext(Dispatchers.IO) {
             val resolver: ContentResolver = application.contentResolver
 
             val imageCollection = MediaStore.Images.Media.getContentUri(
@@ -91,11 +91,14 @@ class CameraRepositoryImpl @Inject constructor(
                     resolver.update(
                         uri, imageContentValues, null, null,
                     )
+                    return@withContext uri
                 } catch (e: Exception) {
                     e.printStackTrace()
                     resolver.delete(uri, null, null)
+                    return@withContext null
                 }
             }
+            return@withContext null
         }
     }
 }

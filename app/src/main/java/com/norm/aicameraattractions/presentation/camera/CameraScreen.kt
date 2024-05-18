@@ -2,7 +2,6 @@ package com.norm.aicameraattractions.presentation.camera
 
 import android.app.Activity
 import android.util.Log
-import androidx.camera.core.CameraSelector
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
@@ -169,12 +168,12 @@ fun CameraScreen(
                     .size(size_box_camera_button)
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable {
-                        controller.cameraSelector =
-                            if (controller.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-                                CameraSelector.DEFAULT_FRONT_CAMERA
-                            } else {
-                                CameraSelector.DEFAULT_BACK_CAMERA
-                            }
+//                        controller.cameraSelector =
+//                            if (controller.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+//                                CameraSelector.DEFAULT_FRONT_CAMERA
+//                            } else {
+//                                CameraSelector.DEFAULT_BACK_CAMERA
+//                            }
                     },
                 contentAlignment = Alignment.Center,
             ) {

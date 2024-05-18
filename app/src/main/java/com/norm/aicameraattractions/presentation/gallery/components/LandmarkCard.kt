@@ -1,6 +1,6 @@
 package com.norm.aicameraattractions.presentation.gallery.components
 
-import androidx.compose.foundation.Image
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -14,14 +14,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
 import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
 import com.norm.aicameraattractions.presentation.smale_padding
 import androidx.compose.ui.tooling.preview.Preview
-import com.norm.aicameraattractions.R
 
 @Composable
 fun AttractionCard(
@@ -33,9 +32,9 @@ fun AttractionCard(
             .aspectRatio(3f / 4f)
             .clip(RoundedCornerShape(medium_rounded)),
     ) {
-        Image(
-            painter = painterResource(id = landmark.image),
-            contentDescription = landmark.description,
+        AsyncImage(
+            model = Uri.parse(landmark.imagePath),
+            contentDescription = landmark.landmarkName,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
         )
@@ -50,7 +49,7 @@ fun AttractionCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = landmark.description,
+                text = landmark.landmarkName,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
             )
         }
@@ -58,8 +57,8 @@ fun AttractionCard(
 }
 
 val landmark = Landmark(
-    image = R.drawable.europe_louvre,
-    description = "Louvre",
+    imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+    landmarkName = "Louvre",
     region = "Europe"
 )
 

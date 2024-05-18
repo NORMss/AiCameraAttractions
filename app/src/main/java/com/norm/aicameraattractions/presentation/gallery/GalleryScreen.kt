@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.norm.aicameraattractions.R
 import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.presentation.gallery.components.AttractionCard
 import com.norm.aicameraattractions.presentation.gallery.components.EmptyLandmarksList
@@ -87,28 +86,28 @@ fun GalleryScreen(
 
 val listLandmarks = listOf(
     Landmark(
-        image = R.drawable.europe_louvre,
-        description = "Louvre",
+        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+        landmarkName = "Louvre",
         region = "Europe"
     ),
     Landmark(
-        image = R.drawable.europe_louvre,
-        description = "Louvre",
+        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+        landmarkName = "Louvre",
         region = "Europe"
     ),
     Landmark(
-        image = R.drawable.europe_louvre,
-        description = "Louvre",
+        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+        landmarkName = "Louvre",
         region = "Europe"
     ),
     Landmark(
-        image = R.drawable.europe_louvre,
-        description = "Louvre",
+        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+        landmarkName = "Louvre",
         region = "Europe"
     ),
     Landmark(
-        image = R.drawable.europe_louvre,
-        description = "Louvre",
+        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+        landmarkName = "Louvre",
         region = "Europe"
     ),
 )
