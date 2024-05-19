@@ -9,6 +9,7 @@ import com.norm.aicameraattractions.data.repository.LandmarkRepositoryImpl
 import com.norm.aicameraattractions.model.repository.CameraRepository
 import com.norm.aicameraattractions.model.repository.LandmarkRepository
 import com.norm.aicameraattractions.model.usecases.camerausecases.CameraUseCases
+import com.norm.aicameraattractions.model.usecases.camerausecases.SavePhoto
 import com.norm.aicameraattractions.model.usecases.camerausecases.TakePhoto
 import com.norm.aicameraattractions.model.usecases.landmarkusecases.DeleteLandmark
 import com.norm.aicameraattractions.model.usecases.landmarkusecases.LandmarkUseCases
@@ -74,7 +75,8 @@ object AppModule {
         cameraRepository: CameraRepository,
     ): CameraUseCases {
         return CameraUseCases(
-            takePhoto = TakePhoto(cameraRepository)
+            takePhoto = TakePhoto(cameraRepository),
+            savePhoto = SavePhoto(cameraRepository),
         )
     }
 }

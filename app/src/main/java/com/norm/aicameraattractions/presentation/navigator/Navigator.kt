@@ -8,7 +8,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.norm.aicameraattractions.MainActivity
 import com.norm.aicameraattractions.presentation.camera.CameraScreen
 import com.norm.aicameraattractions.presentation.camera.CameraViewModel
 import com.norm.aicameraattractions.presentation.gallery.GalleryScreen
@@ -16,7 +15,7 @@ import com.norm.aicameraattractions.presentation.gallery.GalleryViewModel
 import com.norm.aicameraattractions.presentation.nvgarph.Route
 
 @Composable
-fun Navigator(activity: MainActivity) {
+fun Navigator() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -45,9 +44,15 @@ fun Navigator(activity: MainActivity) {
             val viewModel = hiltViewModel<CameraViewModel>()
             val state = viewModel.state.value
             CameraScreen(
-                activity = activity,
-                onTakePhoto = {
-                    viewModel.onTakePhoto(it)
+                onTakePhoto = { controller, landmark ->
+                    viewModel.onTakePhoto(
+                        controller,
+                        landmark.name,
+                        "Europe",
+                    )
+                },
+                onCameraSelector = {
+                    viewModel.onCameraSelector(it)
                 },
                 onOpenGallery = {
                     navigateToScreens(

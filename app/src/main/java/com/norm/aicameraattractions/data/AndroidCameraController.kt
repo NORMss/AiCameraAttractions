@@ -47,7 +47,7 @@ class AndroidCameraController(
 
 
     override suspend fun takePhoto() {
-        cameraUseCases.takePhoto(_controller)
+        cameraUseCases.takePhoto(_controller, {})
     }
 
     override fun cameraSelector() {

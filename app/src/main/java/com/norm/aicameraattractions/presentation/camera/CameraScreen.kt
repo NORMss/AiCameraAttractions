@@ -1,6 +1,5 @@
 package com.norm.aicameraattractions.presentation.camera
 
-import android.app.Activity
 import android.util.Log
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
@@ -36,9 +35,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.norm.aicameraattractions.MainActivity
 import com.norm.aicameraattractions.data.LandmarkClassifierImpl
 import com.norm.aicameraattractions.data.LandmarkImageAnalyzer
 import com.norm.aicameraattractions.model.Classification
@@ -50,17 +49,19 @@ import com.norm.aicameraattractions.presentation.smale_padding
 
 @Composable
 fun CameraScreen(
-    activity: Activity,
-    onTakePhoto: (LifecycleCameraController) -> Unit,
+    onTakePhoto: (LifecycleCameraController, Classification) -> Unit,
+    onCameraSelector: (LifecycleCameraController) -> Unit,
     onOpenGallery: () -> Unit,
 ) {
+    val localContext = LocalContext.current
+
     var classification by remember {
         mutableStateOf(emptyList<Classification>())
     }
     val analyzer = remember {
         LandmarkImageAnalyzer(
             classifier = LandmarkClassifierImpl(
-                context = activity.applicationContext
+                context = localContext
             ),
             onResults = {
                 classification = it
@@ -68,13 +69,13 @@ fun CameraScreen(
         )
     }
     val controller = remember {
-        LifecycleCameraController(activity.applicationContext).apply {
+        LifecycleCameraController(localContext).apply {
             setEnabledUseCases(
                 CameraController.IMAGE_CAPTURE or
                         CameraController.IMAGE_ANALYSIS
             )
             setImageAnalysisAnalyzer(
-                ContextCompat.getMainExecutor(activity.applicationContext),
+                ContextCompat.getMainExecutor(localContext),
                 analyzer,
             )
         }
@@ -146,9 +147,10 @@ fun CameraScreen(
                     .size(size_box_camera_button)
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable {
-                        if ((activity as MainActivity).arePermissionGranted()) {
-                            onTakePhoto(controller)
-                        }
+                        onTakePhoto(
+                            controller,
+                            classification[0]
+                        )
                     },
                 contentAlignment = Alignment.Center,
             ) {
@@ -168,12 +170,7 @@ fun CameraScreen(
                     .size(size_box_camera_button)
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable {
-//                        controller.cameraSelector =
-//                            if (controller.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-//                                CameraSelector.DEFAULT_FRONT_CAMERA
-//                            } else {
-//                                CameraSelector.DEFAULT_BACK_CAMERA
-//                            }
+                        onCameraSelector(controller)
                     },
                 contentAlignment = Alignment.Center,
             ) {
