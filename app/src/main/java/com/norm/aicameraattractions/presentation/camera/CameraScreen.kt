@@ -23,7 +23,6 @@ import androidx.compose.material.icons.filled.Cameraswitch
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,14 +32,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.norm.aicameraattractions.data.LandmarkClassifierImpl
 import com.norm.aicameraattractions.data.LandmarkImageAnalyzer
 import com.norm.aicameraattractions.model.Classification
+import com.norm.aicameraattractions.presentation.camera.components.LandmarkNameCard
 import com.norm.aicameraattractions.presentation.extra_large_padding
 import com.norm.aicameraattractions.presentation.large_rounded
 import com.norm.aicameraattractions.presentation.size_box_camera_button
@@ -98,18 +97,16 @@ fun CameraScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.Center)
+                .align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Log.d("MyLog", classification.toString())
             classification.forEach {
-                Text(
-                    text = it.name,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.primaryContainer)
-                        .padding(smale_padding),
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.primary
+                LandmarkNameCard(
+                    classification = Classification(
+                        name = it.name,
+                        score = it.score,
+                    )
                 )
             }
         }

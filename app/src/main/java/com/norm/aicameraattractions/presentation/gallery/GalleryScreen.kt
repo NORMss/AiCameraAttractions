@@ -19,9 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.norm.aicameraattractions.model.Landmark
-import com.norm.aicameraattractions.presentation.gallery.components.AttractionCard
+import com.norm.aicameraattractions.presentation.gallery.components.LandmarkCard
 import com.norm.aicameraattractions.presentation.gallery.components.EmptyLandmarksList
 import com.norm.aicameraattractions.presentation.medium_padding
+import com.norm.aicameraattractions.presentation.min_size_width_column
+import com.norm.aicameraattractions.presentation.smale_padding
 
 @Composable
 fun GalleryScreen(
@@ -53,7 +55,7 @@ fun GalleryScreen(
     ) { padding ->
         if (landmarks.isNotEmpty()) {
             LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Fixed(2),
+                columns = StaggeredGridCells.Adaptive(min_size_width_column),
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
@@ -61,12 +63,12 @@ fun GalleryScreen(
                         top = padding.calculateTopPadding(),
                     )
                     .padding(horizontal = medium_padding),
-                contentPadding = PaddingValues(medium_padding),
-                horizontalArrangement = Arrangement.spacedBy(medium_padding),
-                verticalItemSpacing = medium_padding,
+                contentPadding = PaddingValues(smale_padding),
+                horizontalArrangement = Arrangement.spacedBy(smale_padding),
+                verticalItemSpacing = smale_padding,
             ) {
                 items(landmarks) { item ->
-                    AttractionCard(
+                    LandmarkCard(
                         landmark = item,
                     )
                 }

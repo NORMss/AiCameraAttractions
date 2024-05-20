@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
 import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
@@ -23,7 +24,7 @@ import com.norm.aicameraattractions.presentation.smale_padding
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AttractionCard(
+fun LandmarkCard(
     landmark: Landmark,
 ) {
     Box(
@@ -51,6 +52,8 @@ fun AttractionCard(
             Text(
                 text = landmark.landmarkName,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }
@@ -65,7 +68,7 @@ val landmark = Landmark(
 @Preview
 @Composable
 fun PreviewAttractionCard() {
-    AttractionCard(
+    LandmarkCard(
         landmark = landmark,
     )
 }
