@@ -29,6 +29,7 @@ import com.norm.aicameraattractions.presentation.smale_padding
 fun GalleryScreen(
     landmarks: List<Landmark>,
     onOpenCamera: () -> Unit,
+    onDetailsClick: (String) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier
@@ -70,6 +71,9 @@ fun GalleryScreen(
                 items(landmarks) { item ->
                     LandmarkCard(
                         landmark = item,
+                        onClick = {
+                            onDetailsClick(item.imagePath)
+                        }
                     )
                 }
             }
@@ -123,6 +127,9 @@ fun PreviewGalleryScreen() {
         landmarks = listLandmarks,
         onOpenCamera = {
 
+        },
+        {
+
         }
     )
 }
@@ -133,6 +140,9 @@ fun PreviewEmptyGalleryScreen() {
     GalleryScreen(
         landmarks = listAttractionsEmpty,
         onOpenCamera = {
+
+        },
+        {
 
         }
     )

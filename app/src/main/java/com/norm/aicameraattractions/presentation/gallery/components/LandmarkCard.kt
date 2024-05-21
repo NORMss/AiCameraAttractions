@@ -2,6 +2,7 @@ package com.norm.aicameraattractions.presentation.gallery.components
 
 import android.net.Uri
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -26,12 +27,16 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun LandmarkCard(
     landmark: Landmark,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(3f / 4f)
-            .clip(RoundedCornerShape(medium_rounded)),
+            .clip(RoundedCornerShape(medium_rounded))
+            .clickable {
+                onClick()
+            },
     ) {
         AsyncImage(
             model = Uri.parse(landmark.imagePath),
@@ -70,5 +75,6 @@ val landmark = Landmark(
 fun PreviewAttractionCard() {
     LandmarkCard(
         landmark = landmark,
+        onClick = {},
     )
 }

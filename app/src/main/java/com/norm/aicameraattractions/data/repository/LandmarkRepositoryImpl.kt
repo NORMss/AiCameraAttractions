@@ -21,6 +21,6 @@ class LandmarkRepositoryImpl(
     }
 
     override suspend fun selectLandmark(imagePath: String): Landmark? {
-        return selectLandmark(imagePath)
+        return landmarkDao.selectLandmark(imagePath)
     }
 }

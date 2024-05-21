@@ -2,14 +2,18 @@ package com.norm.aicameraattractions.presentation.navigator
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.presentation.camera.CameraScreen
 import com.norm.aicameraattractions.presentation.camera.CameraViewModel
+import com.norm.aicameraattractions.presentation.detail.DetailsScreen
+import com.norm.aicameraattractions.presentation.detail.DetailsViewModel
 import com.norm.aicameraattractions.presentation.gallery.GalleryScreen
 import com.norm.aicameraattractions.presentation.gallery.GalleryViewModel
 import com.norm.aicameraattractions.presentation.nvgarph.Route
@@ -24,6 +28,19 @@ fun Navigator() {
             .fillMaxSize(),
     ) {
         composable(
+            route = Route.DetailsScreen.route,
+        ) {
+            val viewModel = hiltViewModel<DetailsViewModel>()
+            val state = viewModel.state.collectAsState().value
+            navController.previousBackStackEntry?.savedStateHandle?.get<String>("image")
+                ?.let { uri ->
+                    viewModel.getLandmark(uri)
+                }
+            DetailsScreen(
+                landmark = state.selectLandmark ?: Landmark("", "", ""),
+            )
+        }
+        composable(
             route = Route.GalleryScreen.route,
         ) {
             val viewModel = hiltViewModel<GalleryViewModel>()
@@ -34,6 +51,12 @@ fun Navigator() {
                     navigateToScreens(
                         navController = navController,
                         route = Route.CameraScreen.route,
+                    )
+                },
+                onDetailsClick = {
+                    navigateToDetails(
+                        navController = navController,
+                        uri = it
                     )
                 }
             )
@@ -78,4 +101,14 @@ private fun navigateToScreens(
             launchSingleTop = true
         }
     }
+}
+
+private fun navigateToDetails(
+    navController: NavController,
+    uri: String,
+) {
+    navController.currentBackStackEntry?.savedStateHandle?.set("image", uri)
+    navController.navigate(
+        route = Route.DetailsScreen.route
+    )
 }
