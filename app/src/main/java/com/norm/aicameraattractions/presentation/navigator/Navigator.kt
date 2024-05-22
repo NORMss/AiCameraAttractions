@@ -67,11 +67,12 @@ fun Navigator() {
             val viewModel = hiltViewModel<CameraViewModel>()
             val state = viewModel.state.value
             CameraScreen(
-                onTakePhoto = { controller, landmark ->
+                state = state,
+                onTakePhoto = { controller, landmark, region ->
                     viewModel.onTakePhoto(
                         controller,
                         landmark.name,
-                        "Europe",
+                        region.name,
                     )
                 },
                 onCameraSelector = {
@@ -82,7 +83,8 @@ fun Navigator() {
                         navController = navController,
                         route = Route.GalleryScreen.route,
                     )
-                }
+                },
+                selectRegion = viewModel::selectRegion
             )
         }
     }

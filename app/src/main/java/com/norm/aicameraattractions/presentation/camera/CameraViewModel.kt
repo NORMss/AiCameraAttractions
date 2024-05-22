@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.model.Region
 import com.norm.aicameraattractions.model.usecases.camerausecases.CameraUseCases
 import com.norm.aicameraattractions.model.usecases.landmarkusecases.LandmarkUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,5 +53,11 @@ class CameraViewModel @Inject constructor(
             } else {
                 CameraSelector.DEFAULT_BACK_CAMERA
             }
+    }
+
+    fun selectRegion(region: Region) {
+        _state.value = _state.value.copy(
+            currentRegion = region
+        )
     }
 }

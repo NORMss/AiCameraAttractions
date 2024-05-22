@@ -39,7 +39,9 @@ import androidx.core.content.ContextCompat
 import com.norm.aicameraattractions.data.LandmarkClassifierImpl
 import com.norm.aicameraattractions.data.LandmarkImageAnalyzer
 import com.norm.aicameraattractions.model.Classification
+import com.norm.aicameraattractions.model.Region
 import com.norm.aicameraattractions.presentation.camera.components.LandmarkNameCard
+import com.norm.aicameraattractions.presentation.camera.components.RegionSelect
 import com.norm.aicameraattractions.presentation.extra_large_padding
 import com.norm.aicameraattractions.presentation.large_rounded
 import com.norm.aicameraattractions.presentation.size_box_camera_button
@@ -48,10 +50,23 @@ import com.norm.aicameraattractions.presentation.smale_padding
 
 @Composable
 fun CameraScreen(
-    onTakePhoto: (LifecycleCameraController, Classification) -> Unit,
+    state: CameraState,
+    onTakePhoto: (LifecycleCameraController, Classification, Region) -> Unit,
     onCameraSelector: (LifecycleCameraController) -> Unit,
     onOpenGallery: () -> Unit,
+    selectRegion: (Region) -> Unit,
 ) {
+    val regions = listOf(
+        Region(
+            name = "Europe",
+            tfModel = "classifier-europe-v1.tflite",
+        ),
+        Region(
+            name = "Asia",
+            tfModel = "classifier-asia-v1.tflite",
+        ),
+    )
+
     val localContext = LocalContext.current
 
     var classification by remember {
@@ -64,7 +79,8 @@ fun CameraScreen(
             ),
             onResults = {
                 classification = it
-            }
+            },
+            modelPath = state.currentRegion.tfModel,
         )
     }
     val controller = remember {
@@ -94,6 +110,19 @@ fun CameraScreen(
                 }
             }
         )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(0.35f)
+                .align(Alignment.TopCenter)
+        ) {
+            RegionSelect(
+                regions = regions,
+                selectedRegion = state.currentRegion,
+                onRegionSelect = {
+                    selectRegion(it)
+                }
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -146,7 +175,8 @@ fun CameraScreen(
                     .clickable {
                         onTakePhoto(
                             controller,
-                            classification[0]
+                            classification[0],
+                            state.currentRegion,
                         )
                     },
                 contentAlignment = Alignment.Center,
