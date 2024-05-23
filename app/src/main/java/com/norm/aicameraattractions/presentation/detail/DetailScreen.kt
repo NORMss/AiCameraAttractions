@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.presentation.detail
 
+import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import com.norm.aicameraattractions.model.Landmark
@@ -28,7 +30,12 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun DetailsScreen(
     landmark: Landmark,
+    onBackClick: () -> Unit,
+    onDeleteClick: () -> Unit,
+    onShareClick: () -> Unit,
 ) {
+    val context = LocalContext.current
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -36,13 +43,20 @@ fun DetailsScreen(
             DetailsTopBar(
                 title = landmark.landmarkName,
                 onBackClick = {
-
+                    onBackClick()
                 },
                 onDeleteClick = {
-
+                    onDeleteClick()
                 },
                 onShareClick = {
-
+                    onShareClick()
+                    val shareIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_STREAM, Uri.parse(landmark.imagePath))
+                        putExtra(Intent.EXTRA_TEXT, "Look where I've been")
+                        type = "image/jpeg"
+                    }
+                    context.startActivity(Intent.createChooser(shareIntent, null))
                 },
             )
         }
@@ -92,6 +106,9 @@ fun Preview() {
             imagePath = "https://res.klook.com/image/upload/c_fill,w_800/q_65/activities/aexudqopqqndey9iixnl.jpg",
             landmarkName = "Louvre",
             region = "Europe",
-        )
+        ),
+        {},
+        {},
+        {},
     )
 }

@@ -28,4 +28,12 @@ class DetailsViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteLandmark() {
+        viewModelScope.launch {
+            _state.value.selectLandmark?.let {
+                landmarkUseCases.deleteLandmark(it)
+            }
+        }
+    }
 }

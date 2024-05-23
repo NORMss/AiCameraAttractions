@@ -38,6 +38,16 @@ fun Navigator() {
                 }
             DetailsScreen(
                 landmark = state.selectLandmark ?: Landmark("", "", ""),
+                onBackClick = {
+                    navController.navigateUp()
+                },
+                onDeleteClick = {
+                    viewModel.deleteLandmark()
+                    navController.navigateUp()
+                },
+                onShareClick = {
+
+                }
             )
         }
         composable(
