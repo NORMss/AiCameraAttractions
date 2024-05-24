@@ -11,11 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.norm.aicameraattractions.model.Classification
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.medium_rounded
+import com.norm.aicameraattractions.ui.theme.Accuracy
+import com.norm.aicameraattractions.ui.theme.colorForAccuracy
 
 @Composable
 fun LandmarkNameCard(
@@ -27,16 +30,20 @@ fun LandmarkNameCard(
             .clip(RoundedCornerShape(medium_rounded))
             .background(
                 when (classification.score) {
-                    in 0f..0.55f -> {
-                        MaterialTheme.colorScheme.errorContainer
+                    in 0f..0.6f -> {
+                        colorForAccuracy(Accuracy.VERY_LOW)
                     }
 
-                    in 0.55f..0.62f -> {
-                        MaterialTheme.colorScheme.tertiaryContainer
+                    in 0.61f..0.65f -> {
+                        colorForAccuracy(Accuracy.LOW)
                     }
 
-                    in 0.62f..1f -> {
-                        MaterialTheme.colorScheme.primaryContainer
+                    in 0.66f..0.72f -> {
+                        colorForAccuracy(Accuracy.MEDIUM)
+                    }
+
+                    in 0.73f..1f -> {
+                        colorForAccuracy(Accuracy.HIGH)
                     }
 
                     else -> {
@@ -49,23 +56,7 @@ fun LandmarkNameCard(
     ) {
         Text(
             text = classification.name,
-            color = when (classification.score) {
-                in 0f..0.55f -> {
-                    MaterialTheme.colorScheme.onErrorContainer
-                }
-
-                in 0.55f..0.62f -> {
-                    MaterialTheme.colorScheme.onTertiaryContainer
-                }
-
-                in 0.62f..1f -> {
-                    MaterialTheme.colorScheme.onPrimaryContainer
-                }
-
-                else -> {
-                    MaterialTheme.colorScheme.onSurface
-                }
-            },
+            color = Color.White,
             textAlign = TextAlign.Center,
         )
     }

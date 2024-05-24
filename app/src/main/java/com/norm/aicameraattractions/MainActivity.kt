@@ -2,13 +2,16 @@ package com.norm.aicameraattractions
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +35,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val mainViewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                Color.TRANSPARENT, Color.TRANSPARENT,
+            )
+        )
 
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
