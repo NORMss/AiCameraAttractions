@@ -15,6 +15,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
@@ -25,6 +29,7 @@ import com.norm.aicameraattractions.presentation.detail.components.DetailsTopBar
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.medium_rounded
 import androidx.compose.ui.tooling.preview.Preview
+import com.norm.aicameraattractions.presentation.detail.components.DeleteDialog
 
 
 @Composable
@@ -36,6 +41,10 @@ fun DetailsScreen(
 ) {
     val context = LocalContext.current
 
+    var isShowDialog by remember {
+        mutableStateOf(false)
+    }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -46,7 +55,7 @@ fun DetailsScreen(
                     onBackClick()
                 },
                 onDeleteClick = {
-                    onDeleteClick()
+                    isShowDialog = true
                 },
                 onShareClick = {
                     onShareClick()
@@ -61,6 +70,16 @@ fun DetailsScreen(
             )
         }
     ) { padding ->
+        if (isShowDialog) {
+            DeleteDialog(
+                onDeleteClick = {
+                    onDeleteClick()
+                },
+                onShowDialog = {
+                    isShowDialog = it
+                }
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
