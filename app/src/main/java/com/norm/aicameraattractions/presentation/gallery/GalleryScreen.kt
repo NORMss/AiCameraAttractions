@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.presentation.gallery
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,7 +21,7 @@ import com.norm.aicameraattractions.presentation.medium_padding
 fun GalleryScreen(
     landmarks: List<Landmark>,
     onOpenCamera: () -> Unit,
-    onDetailsClick: (String) -> Unit,
+    onDetailsClick: (Uri) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier

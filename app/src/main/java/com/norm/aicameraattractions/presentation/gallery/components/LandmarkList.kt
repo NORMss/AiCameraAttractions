@@ -1,6 +1,7 @@
 package com.norm.aicameraattractions.presentation.gallery.components
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -37,7 +38,7 @@ import kotlinx.coroutines.delay
 fun LandmarkList(
     modifier: Modifier = Modifier,
     landmarks: List<Landmark>,
-    onDetailsClick: (String) -> Unit,
+    onDetailsClick: (Uri) -> Unit,
 ) {
     var isLoading by remember {
         mutableStateOf(false)
@@ -135,45 +136,45 @@ private fun Modifier.shimmerEffect() = composed {
     background(color = Color.Gray.copy(alpha = alpha))
 }
 
-private val listLandmarks = listOf(
-    Landmark(
-        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
-        landmarkName = "Louvre",
-        region = "Europe"
-    ),
-    Landmark(
-        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
-        landmarkName = "Louvre",
-        region = "Europe"
-    ),
-    Landmark(
-        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
-        landmarkName = "Louvre",
-        region = "Europe"
-    ),
-    Landmark(
-        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
-        landmarkName = "Louvre",
-        region = "Europe"
-    ),
-    Landmark(
-        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
-        landmarkName = "Louvre",
-        region = "Europe"
-    ),
-)
+//private val listLandmarks = listOf(
+//    Landmark(
+//        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+//        landmarkName = "Louvre",
+//        region = "Europe"
+//    ),
+//    Landmark(
+//        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+//        landmarkName = "Louvre",
+//        region = "Europe"
+//    ),
+//    Landmark(
+//        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+//        landmarkName = "Louvre",
+//        region = "Europe"
+//    ),
+//    Landmark(
+//        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+//        landmarkName = "Louvre",
+//        region = "Europe"
+//    ),
+//    Landmark(
+//        imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+//        landmarkName = "Louvre",
+//        region = "Europe"
+//    ),
+//)
 
 val listAttractionsEmpty = emptyList<Landmark>()
 
-@Preview
-@Composable
-private fun PreviewGalleryScreen() {
-    LandmarkList(
-        landmarks = listLandmarks,
-    ) {
-
-    }
-}
+//@Preview
+//@Composable
+//private fun PreviewGalleryScreen() {
+//    LandmarkList(
+//        landmarks = listLandmarks,
+//    ) {
+//
+//    }
+//}
 
 @Preview
 @Composable

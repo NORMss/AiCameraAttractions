@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.data.repository
 
+import android.net.Uri
 import com.norm.aicameraattractions.data.local.LandmarkDao
 import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.model.repository.LandmarkRepository
@@ -20,7 +21,7 @@ class LandmarkRepositoryImpl(
         return landmarkDao.selectLandmarks()
     }
 
-    override suspend fun selectLandmark(imagePath: String): Landmark? {
+    override suspend fun selectLandmark(imagePath: Uri): Landmark? {
         return landmarkDao.selectLandmark(imagePath)
     }
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.norm.aicameraattractions.data.local.LandmarkDao
 import com.norm.aicameraattractions.data.local.LandmarkDatabase
+import com.norm.aicameraattractions.data.local.UriTypeConverter
 import com.norm.aicameraattractions.data.repository.CameraRepositoryImpl
 import com.norm.aicameraattractions.data.repository.LandmarkRepositoryImpl
 import com.norm.aicameraattractions.model.repository.CameraRepository
@@ -47,7 +48,9 @@ object AppModule {
             context = application,
             klass = LandmarkDatabase::class.java,
             name = LANDMARKS_DB_NAME,
-        ).build()
+        ).addTypeConverter(UriTypeConverter())
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

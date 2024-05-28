@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.model
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,7 +8,7 @@ import androidx.room.PrimaryKey
     tableName = "landmarks"
 )
 data class Landmark(
-    @PrimaryKey val imagePath: String,
+    @PrimaryKey val imagePath: Uri,
     val landmarkName: String,
     val region: String,
 )

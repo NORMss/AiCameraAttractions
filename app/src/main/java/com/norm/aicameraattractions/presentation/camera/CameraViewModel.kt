@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.presentation.camera
 
+import android.net.Uri
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.runtime.State
@@ -32,10 +33,10 @@ class CameraViewModel @Inject constructor(
                 controller = controller,
                 onPhotoCaptured = {
                     viewModelScope.launch {
-                        val uri = cameraUseCases.savePhoto(it)
+                        val uri = cameraUseCases.savePhoto(it) ?: Uri.parse("")
                         landmarkUseCases.upsertLandmark(
                             Landmark(
-                                imagePath = uri.toString(),
+                                imagePath = uri,
                                 landmarkName = landmarkName,
                                 region = region,
                             )

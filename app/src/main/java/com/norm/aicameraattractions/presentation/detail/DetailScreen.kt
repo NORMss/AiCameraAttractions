@@ -61,7 +61,7 @@ fun DetailsScreen(
                     onShareClick()
                     val shareIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_STREAM, Uri.parse(landmark.imagePath))
+                        putExtra(Intent.EXTRA_STREAM, landmark.imagePath)
                         putExtra(Intent.EXTRA_TEXT, "Look where I've been")
                         type = "image/jpeg"
                     }
@@ -96,7 +96,7 @@ fun DetailsScreen(
                     .clip(RoundedCornerShape(medium_rounded)),
             ) {
                 AsyncImage(
-                    model = Uri.parse(landmark.imagePath),
+                    model = landmark.imagePath,
                     contentDescription = landmark.landmarkName,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
@@ -122,7 +122,7 @@ fun DetailsScreen(
 fun Preview() {
     DetailsScreen(
         landmark = Landmark(
-            imagePath = "https://res.klook.com/image/upload/c_fill,w_800/q_65/activities/aexudqopqqndey9iixnl.jpg",
+            imagePath = Uri.parse(""),
             landmarkName = "Louvre",
             region = "Europe",
         ),

@@ -1,6 +1,5 @@
 package com.norm.aicameraattractions.presentation.gallery.components
 
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,7 +21,6 @@ import coil.compose.AsyncImage
 import com.norm.aicameraattractions.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
 import com.norm.aicameraattractions.presentation.smale_padding
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun LandmarkCard(
@@ -39,7 +37,7 @@ fun LandmarkCard(
             },
     ) {
         AsyncImage(
-            model = Uri.parse(landmark.imagePath),
+            model = landmark.imagePath,
             contentDescription = landmark.landmarkName,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -64,17 +62,17 @@ fun LandmarkCard(
     }
 }
 
-val landmark = Landmark(
-    imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
-    landmarkName = "Louvre",
-    region = "Europe"
-)
-
-@Preview
-@Composable
-fun PreviewAttractionCard() {
-    LandmarkCard(
-        landmark = landmark,
-        onClick = {},
-    )
-}
+//val landmark = Landmark(
+//    imagePath = "file:///storage/emulated/0/DCIM/Camera/IMG_20240515_182522446.jpg",
+//    landmarkName = "Louvre",
+//    region = "Europe"
+//)
+//
+//@Preview
+//@Composable
+//fun PreviewAttractionCard() {
+//    LandmarkCard(
+//        landmark = landmark,
+//        onClick = {},
+//    )
+//}

@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.data.local
 
+import android.net.Uri
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,6 +21,6 @@ interface LandmarkDao {
     fun selectLandmarks(): Flow<List<Landmark>>
 
     @Query("SELECT * FROM landmarks WHERE imagePath=:imagePath ")
-    suspend fun selectLandmark(imagePath: String): Landmark?
+    suspend fun selectLandmark(imagePath: Uri): Landmark?
 
 }

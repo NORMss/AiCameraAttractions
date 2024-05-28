@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.presentation.detail
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.norm.aicameraattractions.model.usecases.landmarkusecases.LandmarkUseCases
@@ -17,7 +18,7 @@ class DetailsViewModel @Inject constructor(
     private val _state = MutableStateFlow(DetailsState())
     val state = _state.asStateFlow()
 
-    fun getLandmark(uri: String) {
+    fun getLandmark(uri: Uri) {
         viewModelScope.launch {
             _state.update {
                 it.copy(

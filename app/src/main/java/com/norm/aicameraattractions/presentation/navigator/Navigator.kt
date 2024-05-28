@@ -1,5 +1,6 @@
 package com.norm.aicameraattractions.presentation.navigator
 
+import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,12 +33,12 @@ fun Navigator() {
         ) {
             val viewModel = hiltViewModel<DetailsViewModel>()
             val state = viewModel.state.collectAsState().value
-            navController.previousBackStackEntry?.savedStateHandle?.get<String>("image")
+            navController.previousBackStackEntry?.savedStateHandle?.get<Uri>("image")
                 ?.let { uri ->
                     viewModel.getLandmark(uri)
                 }
             DetailsScreen(
-                landmark = state.selectLandmark ?: Landmark("", "", ""),
+                landmark = state.selectLandmark ?: Landmark(Uri.parse(""), "", ""),
                 onBackClick = {
                     navController.navigateUp()
                 },
@@ -117,7 +118,7 @@ private fun navigateToScreens(
 
 private fun navigateToDetails(
     navController: NavController,
-    uri: String,
+    uri: Uri,
 ) {
     navController.currentBackStackEntry?.savedStateHandle?.set("image", uri)
     navController.navigate(
