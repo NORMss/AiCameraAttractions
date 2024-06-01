@@ -21,11 +21,34 @@ class GalleryViewModel @Inject constructor(
         getLandmarks()
     }
 
+    fun onClickFilterLandmarks(regions: Regions) {
+        filterLandmarks(regions)
+    }
+
+    fun onClickNotFilter() {
+        getLandmarks()
+    }
+
     private fun getLandmarks() {
         landmarkUseCases.selectLandmarks().onEach {
             _state.value = _state.value.copy(
                 landmarksList = it
             )
         }.launchIn(viewModelScope)
+    }
+
+    private fun filterLandmarks(regions: Regions) {
+        _state.value = _state.value.copy(
+            landmarksList = _state.value.landmarksList.filter { landmark ->
+                landmark.region == regions.regionName
+            }
+        )
+    }
+
+    enum class Regions(val regionName: String) {
+        AFRICA("Africa"), ASIA("Asia"), EUROPE("Europe"), NORTH_AMERICA("North America"), ANTARCTICA(
+            "Antarctica"
+        ),
+        SOUTH_AMERICA("South America"),
     }
 }

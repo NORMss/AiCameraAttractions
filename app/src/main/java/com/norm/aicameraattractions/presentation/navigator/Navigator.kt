@@ -69,6 +69,12 @@ fun Navigator() {
                         navController = navController,
                         uri = it
                     )
+                },
+                onClickFilterLandmarks = {
+                    viewModel.onClickFilterLandmarks(it)
+                },
+                onClickNotFilter = {
+                    viewModel.onClickNotFilter()
                 }
             )
         }
