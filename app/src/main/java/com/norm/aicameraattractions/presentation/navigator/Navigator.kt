@@ -57,6 +57,7 @@ fun Navigator() {
             val viewModel = hiltViewModel<GalleryViewModel>()
             val state = viewModel.state.value
             GalleryScreen(
+                state = state,
                 landmarks = state.landmarksList,
                 onOpenCamera = {
                     navigateToScreens(
@@ -70,11 +71,8 @@ fun Navigator() {
                         uri = it
                     )
                 },
-                onClickFilterLandmarks = {
-                    viewModel.onClickFilterLandmarks(it)
-                },
-                onClickNotFilter = {
-                    viewModel.onClickNotFilter()
+                selectFilter = {
+                    viewModel.selectFilter(it)
                 }
             )
         }

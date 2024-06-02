@@ -4,4 +4,12 @@ import com.norm.aicameraattractions.model.Landmark
 
 data class GalleryState(
     val landmarksList: List<Landmark> = emptyList(),
-)
+    val filterRegionList: Map<String, Boolean> = emptyMap()
+) {
+    enum class Regions(val regionName: String) {
+        AFRICA("Africa"), ASIA("Asia"), EUROPE("Europe"), NORTH_AMERICA("North America"), ANTARCTICA(
+            "Antarctica"
+        ),
+        SOUTH_AMERICA("South America"),
+    }
+}

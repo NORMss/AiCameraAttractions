@@ -44,7 +44,7 @@ import com.norm.aicameraattractions.model.Region
 import com.norm.aicameraattractions.presentation.camera.components.LandmarkNameCard
 import com.norm.aicameraattractions.presentation.camera.components.RegionSelect
 import com.norm.aicameraattractions.presentation.extra_large_padding
-import com.norm.aicameraattractions.presentation.gallery.GalleryViewModel.Regions
+import com.norm.aicameraattractions.presentation.gallery.GalleryState.Regions
 import com.norm.aicameraattractions.presentation.large_rounded
 import com.norm.aicameraattractions.presentation.size_box_camera_button
 import com.norm.aicameraattractions.presentation.size_icon_camera_button
