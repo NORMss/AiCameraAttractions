@@ -28,7 +28,7 @@ class GalleryViewModel @Inject constructor(
 
     fun selectFilter(region: String) {
         _state.value = _state.value.copy(
-            filterRegionList = _state.value.filterRegionList.mapValues {
+            filterRegionMap = _state.value.filterRegionMap.mapValues {
                 if (it.key == region) {
                     !it.value
                 } else
@@ -40,14 +40,17 @@ class GalleryViewModel @Inject constructor(
 
     private fun getLandmarks() {
         Log.d("MyLog", "Start getLandmarks()")
-        landmarkUseCases.selectLandmarks().onEach {
+        landmarkUseCases.selectLandmarks().onEach { landmarkList ->
             _state.value = _state.value.copy(
-                landmarksList = it,
-                filterRegionList = it.associate {
+                landmarksList = landmarkList,
+                filterRegionMap = _state.value.filterRegionMap + landmarkList.filter {
+                    it.region !in _state.value.filterRegionMap.keys
+                }.associate {
                     it.region to false
                 }
             )
             tmpLandmarkList = _state.value.landmarksList
+            filterLandmarks()
             Log.d("MyLog", "End getLandmarks()")
         }.launchIn(viewModelScope)
     }
@@ -56,7 +59,7 @@ class GalleryViewModel @Inject constructor(
         Log.d("MyLog", "Start filterLandmarks")
         _state.value = _state.value.copy(
             landmarksList = tmpLandmarkList.filter { landmark ->
-                landmark.region in _state.value.filterRegionList.map {
+                landmark.region in _state.value.filterRegionMap.map {
                     when (it.value) {
                         true -> {
                             Log.d("MyLog", "${landmark.region} - ${it.key}")
@@ -73,6 +76,6 @@ class GalleryViewModel @Inject constructor(
             }
         )
         Log.d("MyLog", "End filterLandmarks")
-        Log.d("MyLog", _state.value.filterRegionList.toString())
+        Log.d("MyLog", _state.value.filterRegionMap.toString())
     }
 }

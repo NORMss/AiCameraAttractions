@@ -88,7 +88,7 @@ fun GalleryScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(smale_padding),
             ) {
-                state.filterRegionList.forEach {
+                state.filterRegionMap.forEach {
                     FilterChip(
                         onClick = {
                             selectFilter(
