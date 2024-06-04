@@ -67,14 +67,20 @@ fun CameraScreen(
             name = Regions.ASIA.regionName,
             tfModel = "classifier-asia-v1.tflite",
         ),
+        Region(
+            name = Regions.AFRICA.regionName,
+            tfModel = "classifier-africa-v1.tflite",
+        ),
     )
 
     val localContext = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     var classification by remember {
         mutableStateOf(emptyList<Classification>())
     }
-    val analyzer = remember {
+
+    val analyzer = remember(state.currentRegion) {
         LandmarkImageAnalyzer(
             classifier = LandmarkClassifierImpl(
                 context = localContext
@@ -85,7 +91,8 @@ fun CameraScreen(
             modelPath = state.currentRegion.tfModel,
         )
     }
-    val controller = remember {
+
+    val controller = remember(state.currentRegion) {
         LifecycleCameraController(localContext).apply {
             setEnabledUseCases(
                 CameraController.IMAGE_CAPTURE or
@@ -95,21 +102,24 @@ fun CameraScreen(
                 ContextCompat.getMainExecutor(localContext),
                 analyzer,
             )
+            bindToLifecycle(lifecycleOwner)
         }
     }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(Color.Black),
     ) {
-        val lifecycleOwner = LocalLifecycleOwner.current
         AndroidView(
             modifier = Modifier.fillMaxSize(),
             factory = {
                 PreviewView(it).apply {
                     this.controller = controller
-                    controller.bindToLifecycle(lifecycleOwner)
                 }
+            },
+            update = {
+                it.controller = controller
             }
         )
         Column(
@@ -176,11 +186,13 @@ fun CameraScreen(
                     .size(size_box_camera_button)
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable {
-                        onTakePhoto(
-                            controller,
-                            classification[0],
-                            state.currentRegion,
-                        )
+                        if (classification.isNotEmpty()) {
+                            onTakePhoto(
+                                controller,
+                                classification[0],
+                                state.currentRegion,
+                            )
+                        }
                     },
                 contentAlignment = Alignment.Center,
             ) {
