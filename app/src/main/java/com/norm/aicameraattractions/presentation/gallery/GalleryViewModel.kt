@@ -43,10 +43,8 @@ class GalleryViewModel @Inject constructor(
         landmarkUseCases.selectLandmarks().onEach { landmarkList ->
             _state.value = _state.value.copy(
                 landmarksList = landmarkList,
-                filterRegionMap = _state.value.filterRegionMap + landmarkList.filter {
-                    it.region !in _state.value.filterRegionMap.keys
-                }.associate {
-                    it.region to false
+                filterRegionMap = landmarkList.associate { landmark ->
+                    landmark.region to (_state.value.filterRegionMap[landmark.region] ?: false)
                 }
             )
             tmpLandmarkList = _state.value.landmarksList
