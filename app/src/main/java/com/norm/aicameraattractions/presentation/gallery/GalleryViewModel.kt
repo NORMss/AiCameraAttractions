@@ -38,6 +38,19 @@ class GalleryViewModel @Inject constructor(
         filterLandmarks()
     }
 
+    fun onSearchChange(active: Boolean) {
+        _state.value = _state.value.copy(
+            isActiveSearch = active
+        )
+    }
+
+    fun onChangeSearchText(text: String) {
+        _state.value = _state.value.copy(
+            searchText = text
+        )
+        filterLandmarks()
+    }
+
     private fun getLandmarks() {
         Log.d("MyLog", "Start getLandmarks()")
         landmarkUseCases.selectLandmarks().onEach { landmarkList ->
@@ -60,7 +73,6 @@ class GalleryViewModel @Inject constructor(
                 landmark.region in _state.value.filterRegionMap.map {
                     when (it.value) {
                         true -> {
-                            Log.d("MyLog", "${landmark.region} - ${it.key}")
                             it.key
                         }
 
@@ -71,6 +83,8 @@ class GalleryViewModel @Inject constructor(
                 }
             }.ifEmpty {
                 tmpLandmarkList
+            }.filter { landmark ->
+                landmark.landmarkName.lowercase().startsWith(_state.value.searchText)
             }
         )
         Log.d("MyLog", "End filterLandmarks")

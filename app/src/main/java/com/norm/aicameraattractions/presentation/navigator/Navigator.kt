@@ -73,6 +73,12 @@ fun Navigator() {
                 },
                 selectFilter = {
                     viewModel.selectFilter(it)
+                },
+                onSearchChange = {
+                    viewModel.onSearchChange(it)
+                },
+                onChangeSearchText = {
+                    viewModel.onChangeSearchText(it)
                 }
             )
         }
