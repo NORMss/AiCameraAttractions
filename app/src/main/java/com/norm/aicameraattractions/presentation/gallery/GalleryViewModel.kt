@@ -5,8 +5,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.norm.aicameraattractions.model.Landmark
-import com.norm.aicameraattractions.model.usecases.landmarkusecases.LandmarkUseCases
+import com.norm.aicameraattractions.domain.model.Landmark
+import com.norm.aicameraattractions.domain.usecases.landmarkusecases.LandmarkUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

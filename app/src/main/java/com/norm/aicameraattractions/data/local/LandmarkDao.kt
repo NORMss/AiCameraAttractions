@@ -6,7 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import kotlinx.coroutines.flow.Flow
 
 @Dao

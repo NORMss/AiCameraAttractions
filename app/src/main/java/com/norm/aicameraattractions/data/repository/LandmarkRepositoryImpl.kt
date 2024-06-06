@@ -2,8 +2,8 @@ package com.norm.aicameraattractions.data.repository
 
 import android.net.Uri
 import com.norm.aicameraattractions.data.local.LandmarkDao
-import com.norm.aicameraattractions.model.Landmark
-import com.norm.aicameraattractions.model.repository.LandmarkRepository
+import com.norm.aicameraattractions.domain.model.Landmark
+import com.norm.aicameraattractions.domain.repository.LandmarkRepository
 import kotlinx.coroutines.flow.Flow
 
 class LandmarkRepositoryImpl(

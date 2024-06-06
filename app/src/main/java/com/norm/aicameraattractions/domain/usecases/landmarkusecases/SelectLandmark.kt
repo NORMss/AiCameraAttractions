@@ -1,8 +1,8 @@
-package com.norm.aicameraattractions.model.usecases.landmarkusecases
+package com.norm.aicameraattractions.domain.usecases.landmarkusecases
 
 import android.net.Uri
-import com.norm.aicameraattractions.model.Landmark
-import com.norm.aicameraattractions.model.repository.LandmarkRepository
+import com.norm.aicameraattractions.domain.model.Landmark
+import com.norm.aicameraattractions.domain.repository.LandmarkRepository
 
 class SelectLandmark(
     private val landmarkRepository: LandmarkRepository,

@@ -2,8 +2,8 @@ package com.norm.aicameraattractions.data
 
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.norm.aicameraattractions.model.Classification
-import com.norm.aicameraattractions.model.LandmarkClassifier
+import com.norm.aicameraattractions.domain.model.Classification
+import com.norm.aicameraattractions.domain.model.LandmarkClassifier
 import com.norm.aicameraattractions.util.centerCrop
 
 class LandmarkImageAnalyzer(

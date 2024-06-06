@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
 import com.norm.aicameraattractions.presentation.smale_padding
 

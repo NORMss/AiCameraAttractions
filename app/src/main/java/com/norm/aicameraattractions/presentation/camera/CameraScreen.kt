@@ -34,18 +34,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.norm.aicameraattractions.data.LandmarkClassifierImpl
 import com.norm.aicameraattractions.data.LandmarkImageAnalyzer
-import com.norm.aicameraattractions.model.Classification
-import com.norm.aicameraattractions.model.Region
+import com.norm.aicameraattractions.domain.model.Classification
+import com.norm.aicameraattractions.domain.model.Region
 import com.norm.aicameraattractions.presentation.camera.components.LandmarkNameCard
-import com.norm.aicameraattractions.presentation.camera.components.RegionSelect
+import com.norm.aicameraattractions.presentation.camera.components.RegionSelectorFlowRow
 import com.norm.aicameraattractions.presentation.extra_large_padding
-import com.norm.aicameraattractions.presentation.gallery.GalleryState.Regions
 import com.norm.aicameraattractions.presentation.large_rounded
+import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.size_box_camera_button
 import com.norm.aicameraattractions.presentation.size_icon_camera_button
 import com.norm.aicameraattractions.presentation.smale_padding
@@ -58,21 +58,6 @@ fun CameraScreen(
     onOpenGallery: () -> Unit,
     selectRegion: (Region) -> Unit,
 ) {
-    val regions = listOf(
-        Region(
-            name = Regions.EUROPE.regionName,
-            tfModel = "classifier-europe-v1.tflite",
-        ),
-        Region(
-            name = Regions.ASIA.regionName,
-            tfModel = "classifier-asia-v1.tflite",
-        ),
-        Region(
-            name = Regions.AFRICA.regionName,
-            tfModel = "classifier-africa-v1.tflite",
-        ),
-    )
-
     val localContext = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
@@ -88,7 +73,7 @@ fun CameraScreen(
             onResults = {
                 classification = it
             },
-            modelPath = state.currentRegion.tfModel,
+            modelPath = state.currentRegion!!.tfModel,
         )
     }
 
@@ -124,13 +109,22 @@ fun CameraScreen(
         )
         Column(
             modifier = Modifier
-                .fillMaxWidth(0.35f)
                 .align(Alignment.TopCenter)
                 .offset(y = extra_large_padding)
         ) {
-            RegionSelect(
-                regions = regions,
-                selectedRegion = state.currentRegion,
+//            RegionSelector(
+//                regions = regions,
+//                selectedRegion = state.currentRegion,
+//                onRegionSelect = {
+//                    selectRegion(it)
+//                }
+//            )
+            RegionSelectorFlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = medium_padding),
+                regions = state.regions,
+                selectedRegion = state.currentRegion!!,
                 onRegionSelect = {
                     selectRegion(it)
                 }
@@ -190,7 +184,7 @@ fun CameraScreen(
                             onTakePhoto(
                                 controller,
                                 classification[0],
-                                state.currentRegion,
+                                state.currentRegion!!,
                             )
                         }
                     },

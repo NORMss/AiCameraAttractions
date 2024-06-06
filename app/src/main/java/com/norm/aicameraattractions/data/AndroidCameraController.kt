@@ -5,9 +5,9 @@ import android.net.Uri
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
-import com.norm.aicameraattractions.model.CameraController
-import com.norm.aicameraattractions.model.Classification
-import com.norm.aicameraattractions.model.usecases.camerausecases.CameraUseCases
+import com.norm.aicameraattractions.domain.model.CameraController
+import com.norm.aicameraattractions.domain.model.Classification
+import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

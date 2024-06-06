@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.camera.CameraScreen
 import com.norm.aicameraattractions.presentation.camera.CameraViewModel
 import com.norm.aicameraattractions.presentation.detail.DetailsScreen

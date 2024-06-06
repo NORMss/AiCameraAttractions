@@ -1,7 +1,7 @@
-package com.norm.aicameraattractions.model.repository
+package com.norm.aicameraattractions.domain.repository
 
 import android.net.Uri
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import kotlinx.coroutines.flow.Flow
 
 interface LandmarkRepository {

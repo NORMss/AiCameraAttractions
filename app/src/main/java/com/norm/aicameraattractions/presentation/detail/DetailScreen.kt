@@ -24,7 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.detail.components.DetailsTopBar
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.medium_rounded

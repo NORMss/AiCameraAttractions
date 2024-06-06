@@ -7,10 +7,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.norm.aicameraattractions.model.Landmark
-import com.norm.aicameraattractions.model.Region
-import com.norm.aicameraattractions.model.usecases.camerausecases.CameraUseCases
-import com.norm.aicameraattractions.model.usecases.landmarkusecases.LandmarkUseCases
+import com.norm.aicameraattractions.domain.model.Landmark
+import com.norm.aicameraattractions.domain.model.Region
+import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCases
+import com.norm.aicameraattractions.domain.usecases.landmarkusecases.LandmarkUseCases
+import com.norm.aicameraattractions.presentation.gallery.GalleryState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +23,29 @@ class CameraViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = mutableStateOf(CameraState())
     val state: State<CameraState> = _state
+
+    init {
+        _state.value = _state.value.copy(
+            regions = listOf(
+                Region(
+                    name = GalleryState.Regions.EUROPE.regionName,
+                    tfModel = "classifier-europe-v1.tflite",
+                ),
+                Region(
+                    name = GalleryState.Regions.ASIA.regionName,
+                    tfModel = "classifier-asia-v1.tflite",
+                ),
+                Region(
+                    name = GalleryState.Regions.AFRICA.regionName,
+                    tfModel = "classifier-africa-v1.tflite",
+                ),
+            ),
+            currentRegion = Region(
+                name = GalleryState.Regions.EUROPE.regionName,
+                tfModel = "classifier-europe-v1.tflite",
+            ),
+        )
+    }
 
     fun onTakePhoto(
         controller: LifecycleCameraController,

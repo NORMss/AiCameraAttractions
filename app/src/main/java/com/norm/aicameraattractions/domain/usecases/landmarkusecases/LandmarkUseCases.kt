@@ -1,4 +1,4 @@
-package com.norm.aicameraattractions.model.usecases.landmarkusecases
+package com.norm.aicameraattractions.domain.usecases.landmarkusecases
 
 data class LandmarkUseCases(
     val upsertLandmark: UpsertLandmark,

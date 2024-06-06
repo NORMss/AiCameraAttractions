@@ -1,8 +1,8 @@
-package com.norm.aicameraattractions.model.usecases.camerausecases
+package com.norm.aicameraattractions.domain.usecases.camerausecases
 
 import android.graphics.Bitmap
 import android.net.Uri
-import com.norm.aicameraattractions.model.repository.CameraRepository
+import com.norm.aicameraattractions.domain.repository.CameraRepository
 
 class SavePhoto(
     private val cameraRepository: CameraRepository,

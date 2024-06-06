@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.foundation.layout)
     implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.androidx.room.ktx)

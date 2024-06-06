@@ -2,8 +2,8 @@ package com.norm.aicameraattractions.data
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.norm.aicameraattractions.model.Classification
-import com.norm.aicameraattractions.model.LandmarkClassifier
+import com.norm.aicameraattractions.domain.model.Classification
+import com.norm.aicameraattractions.domain.model.LandmarkClassifier
 import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.core.vision.ImageProcessingOptions
 import org.tensorflow.lite.task.vision.classifier.ImageClassifier

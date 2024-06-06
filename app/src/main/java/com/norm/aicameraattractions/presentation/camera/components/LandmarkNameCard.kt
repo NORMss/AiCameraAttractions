@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.norm.aicameraattractions.model.Classification
+import com.norm.aicameraattractions.domain.model.Classification
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.medium_rounded
 import com.norm.aicameraattractions.ui.theme.Accuracy

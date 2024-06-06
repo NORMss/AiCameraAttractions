@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
 package com.norm.aicameraattractions.presentation.camera.components
 
@@ -17,11 +17,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import com.norm.aicameraattractions.model.Region
+import com.norm.aicameraattractions.domain.model.Region
 import com.norm.aicameraattractions.presentation.medium_rounded
 
 @Composable
-fun RegionSelect(
+fun RegionSelector(
     regions: List<Region>,
     selectedRegion: Region,
     onRegionSelect: (Region) -> Unit,

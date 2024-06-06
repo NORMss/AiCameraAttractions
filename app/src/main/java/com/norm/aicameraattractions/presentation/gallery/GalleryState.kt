@@ -1,6 +1,6 @@
 package com.norm.aicameraattractions.presentation.gallery
 
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 
 data class GalleryState(
     val landmarksList: List<Landmark> = emptyList(),

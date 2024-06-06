@@ -28,7 +28,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
 import com.norm.aicameraattractions.presentation.min_size_width_column
 import com.norm.aicameraattractions.presentation.smale_padding

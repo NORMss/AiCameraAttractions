@@ -1,4 +1,4 @@
-package com.norm.aicameraattractions.model
+package com.norm.aicameraattractions.domain.model
 
 import android.graphics.Bitmap
 

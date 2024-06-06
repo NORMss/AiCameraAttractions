@@ -14,7 +14,7 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
 import com.norm.aicameraattractions.R
-import com.norm.aicameraattractions.model.repository.CameraRepository
+import com.norm.aicameraattractions.domain.repository.CameraRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.OutputStream

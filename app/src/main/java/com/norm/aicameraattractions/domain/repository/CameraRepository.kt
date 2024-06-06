@@ -1,4 +1,4 @@
-package com.norm.aicameraattractions.model.repository
+package com.norm.aicameraattractions.domain.repository
 
 import android.graphics.Bitmap
 import android.net.Uri

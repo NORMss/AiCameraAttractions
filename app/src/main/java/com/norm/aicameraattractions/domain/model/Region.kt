@@ -1,4 +1,4 @@
-package com.norm.aicameraattractions.model
+package com.norm.aicameraattractions.domain.model
 
 data class Region(
     val name: String,

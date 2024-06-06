@@ -30,7 +30,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.norm.aicameraattractions.model.Landmark
+import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.gallery.components.LandmarkList
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.smale_padding
