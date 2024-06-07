@@ -59,9 +59,13 @@ class CameraRepositoryImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
             val resolver: ContentResolver = application.contentResolver
 
-            val imageCollection = MediaStore.Images.Media.getContentUri(
-                MediaStore.VOLUME_EXTERNAL_PRIMARY
-            )
+            val imageCollection = when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> MediaStore.Images.Media.getContentUri(
+                    MediaStore.VOLUME_EXTERNAL_PRIMARY
+                )
+
+                else -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            }
 
             val appName = application.getString(R.string.app_name)
             val timeInMillis = System.currentTimeMillis()
@@ -71,13 +75,20 @@ class CameraRepositoryImpl @Inject constructor(
                     "${timeInMillis}_image" + ".jpg",
 
                     )
-                put(
-                    MediaStore.MediaColumns.RELATIVE_PATH,
-                    Environment.DIRECTORY_DCIM + "/$appName"
-                )
                 put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
-                put(MediaStore.MediaColumns.DATE_TAKEN, timeInMillis)
-                put(MediaStore.MediaColumns.IS_PENDING, 1)
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    put(MediaStore.MediaColumns.DATE_TAKEN, timeInMillis)
+                    put(
+                        MediaStore.MediaColumns.RELATIVE_PATH,
+                        Environment.DIRECTORY_DCIM + "/$appName"
+                    )
+                    put(MediaStore.MediaColumns.IS_PENDING, 1)
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    put(MediaStore.Images.Media.AUTHOR, appName)
+                }
             }
 
             val imageMediaStoreUri: Uri? = resolver.insert(

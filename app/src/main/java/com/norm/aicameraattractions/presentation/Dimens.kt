@@ -15,4 +15,6 @@ val size_box_camera_button = 64.dp
 val size_icon_camera_button = 32.dp
 val min_size_width_column = 180.dp
 
+val smale_image = 32.dp
+
 const val DEFAULT_MAX_LINES = 2

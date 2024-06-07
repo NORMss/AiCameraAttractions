@@ -49,7 +49,7 @@ object AppModule {
             klass = LandmarkDatabase::class.java,
             name = LANDMARKS_DB_NAME,
         ).addTypeConverter(UriTypeConverter())
-            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration(true)
             .build()
     }
 

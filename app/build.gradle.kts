@@ -53,11 +53,17 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.glance)
+    implementation(libs.androidx.glance.appwidget)
+
+    implementation(libs.material3)
+
     implementation(libs.androidx.foundation.layout)
     implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.work.runtime.ktx)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.coil.compose)
