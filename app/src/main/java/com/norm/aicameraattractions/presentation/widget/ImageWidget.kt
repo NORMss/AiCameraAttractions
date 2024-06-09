@@ -27,15 +27,16 @@ import kotlin.time.toJavaDuration
 class ImageWidget : GlanceAppWidget() {
 
     val Context.imageWidgetStore by preferencesDataStore("ImageWidget")
-    private val lastImage = stringPreferencesKey("lastImage")
+    val lastImage = stringPreferencesKey("lastImage")
 
     suspend fun DataStore<Preferences>.loadImage() {
-        updateData { prefs ->
-            prefs.toMutablePreferences().apply {
-                this[lastImage] =
-                    "file:///storage/emulated/0/DCIM/Camera/IMG_20240531_171854407.jpg"
-            }
-        }
+//        landmarkUseCases.selectLandmarks().onEach { landmarks ->
+//            updateData { prefs ->
+//                prefs.toMutablePreferences().apply {
+//                    this[lastImage] = landmarks.last().imagePath.toString()
+//                }
+//            }
+//        }
     }
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -73,7 +74,7 @@ class ImageWidgetReceiver : GlanceAppWidgetReceiver() {
 
 class ImageWidgetWorker(
     appContext: Context,
-    params: WorkerParameters
+    params: WorkerParameters,
 ) : CoroutineWorker(appContext, params) {
     override suspend fun doWork(): Result {
         ImageWidget().apply {

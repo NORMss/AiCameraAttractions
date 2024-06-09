@@ -105,7 +105,8 @@ fun Navigator() {
                         route = Route.GalleryScreen.route,
                     )
                 },
-                selectRegion = viewModel::selectRegion
+                onSelectRegion = viewModel::selectRegion,
+                onSetClassification = viewModel::setClassification
             )
         }
     }

@@ -7,6 +7,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.norm.aicameraattractions.domain.model.Classification
+import com.norm.aicameraattractions.domain.model.DownloadState
 import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.domain.model.Region
 import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCases
@@ -30,20 +32,36 @@ class CameraViewModel @Inject constructor(
                 Region(
                     name = GalleryState.Regions.EUROPE.regionName,
                     tfModel = "classifier-europe-v1.tflite",
+                    downloadState = DownloadState.Downloaded("File downloaded"),
                 ),
                 Region(
                     name = GalleryState.Regions.ASIA.regionName,
                     tfModel = "classifier-asia-v1.tflite",
-                ),
+                    downloadState = DownloadState.Downloaded("File downloaded"),
+
+                    ),
                 Region(
                     name = GalleryState.Regions.AFRICA.regionName,
                     tfModel = "classifier-africa-v1.tflite",
+                    downloadState = DownloadState.Downloaded("File downloaded")
+                ),
+                Region(
+                    name = GalleryState.Regions.NORTH_AMERICA.regionName,
+                    tfModel = "classifier-north-america-v1.tflite",
+                    downloadState = DownloadState.NotDownloaded("File not downloaded")
                 ),
             ),
             currentRegion = Region(
                 name = GalleryState.Regions.EUROPE.regionName,
                 tfModel = "classifier-europe-v1.tflite",
+                downloadState = DownloadState.Downloaded("File downloaded"),
             ),
+        )
+    }
+
+    fun setClassification(classification: List<Classification>) {
+        _state.value = _state.value.copy(
+            classification = classification
         )
     }
 

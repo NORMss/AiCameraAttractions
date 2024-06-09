@@ -1,6 +1,5 @@
 package com.norm.aicameraattractions.presentation.camera
 
-import android.util.Log
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
@@ -25,10 +24,7 @@ import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -56,14 +52,11 @@ fun CameraScreen(
     onTakePhoto: (LifecycleCameraController, Classification, Region) -> Unit,
     onCameraSelector: (LifecycleCameraController) -> Unit,
     onOpenGallery: () -> Unit,
-    selectRegion: (Region) -> Unit,
+    onSelectRegion: (Region) -> Unit,
+    onSetClassification: (List<Classification>) -> Unit,
 ) {
     val localContext = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-
-    var classification by remember {
-        mutableStateOf(emptyList<Classification>())
-    }
 
     val analyzer = remember(state.currentRegion) {
         LandmarkImageAnalyzer(
@@ -71,7 +64,7 @@ fun CameraScreen(
                 context = localContext
             ),
             onResults = {
-                classification = it
+                onSetClassification(it)
             },
             modelPath = state.currentRegion!!.tfModel,
         )
@@ -126,7 +119,7 @@ fun CameraScreen(
                 regions = state.regions,
                 selectedRegion = state.currentRegion!!,
                 onRegionSelect = {
-                    selectRegion(it)
+                    onSelectRegion(it)
                 }
             )
         }
@@ -136,8 +129,7 @@ fun CameraScreen(
                 .align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Log.d("MyLog", classification.toString())
-            classification.forEach {
+            state.classification.forEach {
                 LandmarkNameCard(
                     classification = Classification(
                         name = it.name,
@@ -180,10 +172,10 @@ fun CameraScreen(
                     .size(size_box_camera_button)
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable {
-                        if (classification.isNotEmpty()) {
+                        if (state.classification.isNotEmpty()) {
                             onTakePhoto(
                                 controller,
-                                classification[0],
+                                state.classification[0],
                                 state.currentRegion!!,
                             )
                         }

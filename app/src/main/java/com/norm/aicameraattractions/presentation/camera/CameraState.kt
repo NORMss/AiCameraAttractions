@@ -9,4 +9,5 @@ data class CameraState(
     val imageUri: Uri? = null,
     val regions: List<Region> = emptyList(),
     val currentRegion: Region? = null,
+    val classification: List<Classification> = emptyList()
 )

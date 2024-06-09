@@ -17,4 +17,4 @@ val min_size_width_column = 180.dp
 
 val smale_image = 32.dp
 
-const val DEFAULT_MAX_LINES = 2
+const val DEFAULT_MAX_LINES = 1
