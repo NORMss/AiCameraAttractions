@@ -8,6 +8,8 @@ data class Region(
 
 sealed class DownloadState(val message: String? = null) {
     class Downloaded(message: String) : DownloadState(message)
+
+    class Downloading(message: String) : DownloadState(message)
     class NotDownloaded(message: String) : DownloadState(message)
     class Error(message: String) : DownloadState(message)
 }

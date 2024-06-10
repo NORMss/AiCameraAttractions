@@ -12,17 +12,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.norm.aicameraattractions.domain.model.DownloadState
 import com.norm.aicameraattractions.domain.model.Region
@@ -37,6 +39,7 @@ fun RegionSelectorFlowRow(
     regions: List<Region>,
     selectedRegion: Region,
     onRegionSelect: (Region) -> Unit,
+    onStartDownload: (Region) -> Unit,
 ) {
     var maxLines by remember {
         mutableIntStateOf(DEFAULT_MAX_LINES)
@@ -102,6 +105,15 @@ fun RegionSelectorFlowRow(
                             regions[index].downloadState.message,
                             Toast.LENGTH_LONG,
                         ).show()
+                        onStartDownload(regions[index])
+                    }
+
+                    is DownloadState.Downloading -> {
+                        Toast.makeText(
+                            context,
+                            regions[index].downloadState.message,
+                            Toast.LENGTH_LONG,
+                        ).show()
                     }
 
                     is DownloadState.Error -> {
@@ -111,29 +123,72 @@ fun RegionSelectorFlowRow(
                             Toast.LENGTH_LONG,
                         ).show()
                     }
+
                 }
             },
-            colors = when(regions[index].downloadState){
+            colors = when (regions[index].downloadState) {
                 is DownloadState.Downloaded -> {
                     if (regions[index] == selectedRegion) ButtonDefaults.buttonColors(
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                     ) else ButtonDefaults.buttonColors()
                 }
+
                 is DownloadState.NotDownloaded -> {
                     ButtonDefaults.buttonColors(
                         contentColor = MaterialTheme.colorScheme.onSurface,
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     )
                 }
+
+                is DownloadState.Downloading -> {
+                    ButtonDefaults.buttonColors(
+                        contentColor = MaterialTheme.colorScheme.onSurface,
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    )
+                }
+
                 is DownloadState.Error -> {
                     ButtonDefaults.buttonColors()
                 }
+
             }
         ) {
-            Text(
-                text = regions[index].name
-            )
+            when (regions[index].downloadState) {
+                is DownloadState.Downloaded -> {
+                    Text(
+                        text = regions[index].name
+                    )
+                }
+
+                is DownloadState.NotDownloaded -> {
+                    Text(
+                        text = regions[index].name
+                    )
+                }
+
+                is DownloadState.Downloading -> {
+                    Text(
+                        text = regions[index].name
+                    )
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .size(
+                                ButtonDefaults.IconSize
+                            ),
+                        color = MaterialTheme.colorScheme.secondary,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                    )
+                }
+
+                is DownloadState.Error -> {
+                    Text(
+                        text = regions[index].name
+                    )
+                }
+
+            }
         }
     }
 }
@@ -149,6 +204,9 @@ private fun PreviewRegionSelectorFlowRow() {
             downloadState = DownloadState.Downloaded("File downloaded"),
         ),
         onRegionSelect = {
+
+        },
+        onStartDownload = {
 
         },
     )

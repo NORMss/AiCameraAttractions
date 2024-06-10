@@ -106,7 +106,8 @@ fun Navigator() {
                     )
                 },
                 onSelectRegion = viewModel::selectRegion,
-                onSetClassification = viewModel::setClassification
+                onSetClassification = viewModel::setClassification,
+                onStartDownload = viewModel::fakeStartDownload,
             )
         }
     }

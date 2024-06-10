@@ -54,6 +54,7 @@ fun CameraScreen(
     onOpenGallery: () -> Unit,
     onSelectRegion: (Region) -> Unit,
     onSetClassification: (List<Classification>) -> Unit,
+    onStartDownload: (Region) -> Unit,
 ) {
     val localContext = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -120,7 +121,10 @@ fun CameraScreen(
                 selectedRegion = state.currentRegion!!,
                 onRegionSelect = {
                     onSelectRegion(it)
-                }
+                },
+                onStartDownload = {
+                    onStartDownload(it)
+                },
             )
         }
         Column(

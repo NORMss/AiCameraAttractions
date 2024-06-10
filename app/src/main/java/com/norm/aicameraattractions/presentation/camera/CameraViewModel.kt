@@ -1,6 +1,7 @@
 package com.norm.aicameraattractions.presentation.camera
 
 import android.net.Uri
+import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.runtime.State
@@ -15,6 +16,7 @@ import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCase
 import com.norm.aicameraattractions.domain.usecases.landmarkusecases.LandmarkUseCases
 import com.norm.aicameraattractions.presentation.gallery.GalleryState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,6 +59,40 @@ class CameraViewModel @Inject constructor(
                 downloadState = DownloadState.Downloaded("File downloaded"),
             ),
         )
+    }
+
+    fun fakeStartDownload(region: Region) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(
+                regions = _state.value.regions.map {
+                    if (it == region) {
+                        it.copy(
+                            downloadState = DownloadState.Downloading("Starting download")
+                        )
+                    } else {
+                        it
+                    }
+                }
+            )
+            fakeDownload(2000L)
+            _state.value = _state.value.copy(
+                regions = _state.value.regions.map {
+                    if (it == region) {
+                        it.copy(
+                            downloadState = DownloadState.NotDownloaded("File not downloaded")
+                        )
+                    } else {
+                        it
+                    }
+                }
+            )
+            Log.d(
+                "MyLog", _state.value.regions.map {
+                    "${it.name}\n" +
+                            "${it.downloadState.message}"
+                }.toString()
+            )
+        }
     }
 
     fun setClassification(classification: List<Classification>) {
@@ -102,5 +138,9 @@ class CameraViewModel @Inject constructor(
         _state.value = _state.value.copy(
             currentRegion = region
         )
+    }
+
+    private suspend fun fakeDownload(timeMillis: Long) {
+        delay(timeMillis)
     }
 }
