@@ -77,7 +77,7 @@ class CameraViewModel @Inject constructor(
             fakeDownload(2000L)
             _state.value = _state.value.copy(
                 regions = _state.value.regions.map {
-                    if (it == region) {
+                    if (it.name == region.name) {
                         it.copy(
                             downloadState = DownloadState.NotDownloaded("File not downloaded")
                         )
@@ -85,12 +85,6 @@ class CameraViewModel @Inject constructor(
                         it
                     }
                 }
-            )
-            Log.d(
-                "MyLog", _state.value.regions.map {
-                    "${it.name}\n" +
-                            "${it.downloadState.message}"
-                }.toString()
             )
         }
     }
@@ -142,5 +136,6 @@ class CameraViewModel @Inject constructor(
 
     private suspend fun fakeDownload(timeMillis: Long) {
         delay(timeMillis)
+        Log.d("MyLog", "fakeDownload Stop")
     }
 }
