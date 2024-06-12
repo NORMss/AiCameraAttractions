@@ -52,7 +52,6 @@ class GalleryViewModel @Inject constructor(
     }
 
     private fun getLandmarks() {
-        Log.d("MyLog", "Start getLandmarks()")
         landmarkUseCases.selectLandmarks().onEach { landmarkList ->
             _state.value = _state.value.copy(
                 landmarksList = landmarkList,
@@ -62,12 +61,10 @@ class GalleryViewModel @Inject constructor(
             )
             tmpLandmarkList = _state.value.landmarksList
             filterLandmarks()
-            Log.d("MyLog", "End getLandmarks()")
         }.launchIn(viewModelScope)
     }
 
     private fun filterLandmarks() {
-        Log.d("MyLog", "Start filterLandmarks")
         _state.value = _state.value.copy(
             landmarksList = tmpLandmarkList.filter { landmark ->
                 landmark.region in _state.value.filterRegionMap.map {
@@ -87,7 +84,5 @@ class GalleryViewModel @Inject constructor(
                 landmark.landmarkName.lowercase().startsWith(_state.value.searchText)
             }
         )
-        Log.d("MyLog", "End filterLandmarks")
-        Log.d("MyLog", _state.value.filterRegionMap.toString())
     }
 }

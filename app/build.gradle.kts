@@ -53,6 +53,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.gson)
+
     implementation(libs.androidx.glance)
     implementation(libs.androidx.glance.appwidget)
 

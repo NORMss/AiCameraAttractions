@@ -1,5 +1,7 @@
 package com.norm.aicameraattractions.presentation.camera.components
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ContextualFlowRow
@@ -90,110 +92,19 @@ fun RegionSelectorFlowRow(
         ),
         horizontalArrangement = Arrangement.spacedBy(smale_padding),
     ) { index ->
-//        Button(
-//            onClick = {
-//                when (regions[index].downloadState) {
-//                    is DownloadState.Downloaded -> {
-//                        if (regions[index] != selectedRegion)
-//                            onRegionSelect(regions[index])
-//                    }
-//
-//                    is DownloadState.NotDownloaded -> {
-//                        Toast.makeText(
-//                            context,
-//                            regions[index].downloadState.message,
-//                            Toast.LENGTH_LONG,
-//                        ).show()
-//                        onStartDownload(regions[index])
-//                    }
-//
-//                    is DownloadState.Downloading -> {
-//                        Toast.makeText(
-//                            context,
-//                            regions[index].downloadState.message,
-//                            Toast.LENGTH_LONG,
-//                        ).show()
-//                    }
-//
-//                    is DownloadState.Error -> {
-//                        Toast.makeText(
-//                            context,
-//                            regions[index].downloadState.message,
-//                            Toast.LENGTH_LONG,
-//                        ).show()
-//                    }
-//
-//                }
-//            },
-//            colors = when (regions[index].downloadState) {
-//                is DownloadState.Downloaded -> {
-//                    if (regions[index] == selectedRegion) ButtonDefaults.buttonColors(
-//                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-//                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-//                    ) else ButtonDefaults.buttonColors()
-//                }
-//
-//                is DownloadState.NotDownloaded -> {
-//                    ButtonDefaults.buttonColors(
-//                        contentColor = MaterialTheme.colorScheme.onSurface,
-//                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
-//                    )
-//                }
-//
-//                is DownloadState.Downloading -> {
-//                    ButtonDefaults.buttonColors(
-//                        contentColor = MaterialTheme.colorScheme.onSurface,
-//                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
-//                    )
-//                }
-//
-//                is DownloadState.Error -> {
-//                    ButtonDefaults.buttonColors()
-//                }
-//
-//            }
-//        ) {
-//            when (regions[index].downloadState) {
-//                is DownloadState.Downloaded -> {
-//                    Text(
-//                        text = regions[index].name
-//                    )
-//                }
-//
-//                is DownloadState.NotDownloaded -> {
-//                    Text(
-//                        text = regions[index].name
-//                    )
-//                }
-//
-//                is DownloadState.Downloading -> {
-//                    Text(
-//                        text = regions[index].name
-//                    )
-//                    CircularProgressIndicator(
-//                        modifier = Modifier
-//                            .align(Alignment.CenterVertically)
-//                            .size(
-//                                ButtonDefaults.IconSize
-//                            ),
-//                        color = MaterialTheme.colorScheme.secondary,
-//                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
-//                    )
-//                }
-//
-//                is DownloadState.Error -> {
-//                    Text(
-//                        text = regions[index].name
-//                    )
-//                }
-//
-//            }
+//        LaunchedEffect(key1 = regions[index]) {
+//            Toast.makeText(
+//                context,
+//                regions[index].downloadState.message,
+//                Toast.LENGTH_LONG,
+//            ).show()
 //        }
         when (regions[index].downloadState) {
             is DownloadState.Downloaded -> {
+                Log.d("MyLog", "${regions[index].name} ${selectedRegion.name}")
                 DownloadedButton(
                     text = regions[index].name,
-                    isSelected = regions[index] == selectedRegion,
+                    isSelected = regions[index].name == selectedRegion.name,
                     onClick = {
                         if (regions[index] != selectedRegion) {
                             onRegionSelect(regions[index])
@@ -206,6 +117,11 @@ fun RegionSelectorFlowRow(
                 DownloadButton(
                     text = regions[index].name,
                 )
+                Toast.makeText(
+                    context,
+                    regions[index].downloadState.message,
+                    Toast.LENGTH_LONG,
+                ).show()
             }
 
             is DownloadState.NotDownloaded -> {

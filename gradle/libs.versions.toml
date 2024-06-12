@@ -22,6 +22,7 @@ room = "2.7.0-alpha03"
 coilCompose = "2.6.0"
 materialIconsCore = "1.6.7"
 workRuntimeKtx = "2.9.0"
+gson = "2.11.0"
 appcompat = "1.7.0"
 
 [libraries]
@@ -35,6 +36,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "foundationLayout" }
 androidx-glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
 androidx-glance = { module = "androidx.glance:glance", version.ref = "glance" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
