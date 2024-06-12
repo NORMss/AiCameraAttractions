@@ -12,6 +12,7 @@ import com.norm.aicameraattractions.domain.model.Classification
 import com.norm.aicameraattractions.domain.model.DownloadState
 import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.domain.model.Region
+import com.norm.aicameraattractions.domain.remote.Downloader
 import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCases
 import com.norm.aicameraattractions.domain.usecases.landmarkusecases.LandmarkUseCases
 import com.norm.aicameraattractions.presentation.gallery.GalleryState
@@ -24,6 +25,7 @@ import javax.inject.Inject
 class CameraViewModel @Inject constructor(
     private val cameraUseCases: CameraUseCases,
     private val landmarkUseCases: LandmarkUseCases,
+    private val downloader: Downloader,
 ) : ViewModel() {
     private val _state = mutableStateOf(CameraState())
     val state: State<CameraState> = _state
@@ -87,6 +89,13 @@ class CameraViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    fun startDownload(region: Region) {
+        val model = region.tfModel.substringBeforeLast(".")
+        val statusDownload =
+            downloader.downloadFile("https://www.kaggle.com/api/v1/models/google/landmarks/tfLite/${model}/1/download")
+        Log.d("MyLog", statusDownload.toString())
     }
 
     fun setClassification(classification: List<Classification>) {

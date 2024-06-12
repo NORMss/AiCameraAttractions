@@ -1,12 +1,15 @@
 package com.norm.aicameraattractions.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.norm.aicameraattractions.data.local.LandmarkDao
 import com.norm.aicameraattractions.data.local.LandmarkDatabase
 import com.norm.aicameraattractions.data.local.UriTypeConverter
+import com.norm.aicameraattractions.data.remote.AndroidDownloader
 import com.norm.aicameraattractions.data.repository.CameraRepositoryImpl
 import com.norm.aicameraattractions.data.repository.LandmarkRepositoryImpl
+import com.norm.aicameraattractions.domain.remote.Downloader
 import com.norm.aicameraattractions.domain.repository.CameraRepository
 import com.norm.aicameraattractions.domain.repository.LandmarkRepository
 import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCases
@@ -21,6 +24,7 @@ import com.norm.aicameraattractions.util.LANDMARKS_DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -81,5 +85,13 @@ object AppModule {
             takePhoto = TakePhoto(cameraRepository),
             savePhoto = SavePhoto(cameraRepository),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideDownloader(
+        @ApplicationContext context: Context,
+    ): Downloader {
+        return AndroidDownloader(context)
     }
 }
