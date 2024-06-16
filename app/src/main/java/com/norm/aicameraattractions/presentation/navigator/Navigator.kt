@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.camera.CameraScreen
 import com.norm.aicameraattractions.presentation.camera.CameraViewModel
@@ -17,6 +18,7 @@ import com.norm.aicameraattractions.presentation.detail.DetailsScreen
 import com.norm.aicameraattractions.presentation.detail.DetailsViewModel
 import com.norm.aicameraattractions.presentation.gallery.GalleryScreen
 import com.norm.aicameraattractions.presentation.gallery.GalleryViewModel
+import com.norm.aicameraattractions.presentation.nvgarph.NewRoute
 import com.norm.aicameraattractions.presentation.nvgarph.Route
 
 @Composable
@@ -24,19 +26,20 @@ fun Navigator() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Route.GalleryScreen.route,
+        startDestination = NewRoute.GalleryScreen,
         modifier = Modifier
             .fillMaxSize(),
     ) {
-        composable(
-            route = Route.DetailsScreen.route,
-        ) {
+        composable<Route.DetailsScreen> { backStackEntry ->
             val viewModel = hiltViewModel<DetailsViewModel>()
             val state = viewModel.state.collectAsState().value
-            navController.previousBackStackEntry?.savedStateHandle?.get<Uri>("image")
-                ?.let { uri ->
-                    viewModel.getLandmark(uri)
-                }
+//            navController.previousBackStackEntry?.savedStateHandle?.get<Uri>("image")
+//                ?.let { uri ->
+//                    viewModel.getLandmark(uri)
+//                }
+            backStackEntry.toRoute<NewRoute.DetailsScreen>().let { detailsScreen ->
+                viewModel.getLandmark(Uri.parse(detailsScreen.uri))
+            }
             DetailsScreen(
                 landmark = state.selectLandmark ?: Landmark(Uri.parse(""), "", ""),
                 onBackClick = {
@@ -51,9 +54,7 @@ fun Navigator() {
                 }
             )
         }
-        composable(
-            route = Route.GalleryScreen.route,
-        ) {
+        composable<NewRoute.GalleryScreen> {
             val viewModel = hiltViewModel<GalleryViewModel>()
             val state = viewModel.state.value
             GalleryScreen(
@@ -62,13 +63,16 @@ fun Navigator() {
                 onOpenCamera = {
                     navigateToScreens(
                         navController = navController,
-                        route = Route.CameraScreen.route,
+                        route = NewRoute.CameraScreen,
                     )
                 },
                 onDetailsClick = {
-                    navigateToDetails(
-                        navController = navController,
-                        uri = it
+//                    navigateToDetails(
+//                        navController = navController,
+//                        uri = it
+//                    )
+                    navController.navigate(
+                        NewRoute.DetailsScreen(uri = it.toString())
                     )
                 },
                 selectFilter = {
@@ -82,9 +86,7 @@ fun Navigator() {
                 }
             )
         }
-        composable(
-            route = Route.CameraScreen.route,
-        ) {
+        composable<NewRoute.CameraScreen> {
             val viewModel = hiltViewModel<CameraViewModel>()
             val state = viewModel.state.value
             CameraScreen(
@@ -102,7 +104,7 @@ fun Navigator() {
                 onOpenGallery = {
                     navigateToScreens(
                         navController = navController,
-                        route = Route.GalleryScreen.route,
+                        route = NewRoute.GalleryScreen
                     )
                 },
                 onSelectRegion = viewModel::selectRegion,
@@ -115,7 +117,7 @@ fun Navigator() {
 
 private fun navigateToScreens(
     navController: NavController,
-    route: String,
+    route: NewRoute,
 ) {
     navController.navigate(route) {
         navController.graph.startDestinationRoute?.let { galleryScreen ->

@@ -27,7 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.norm.aicameraattractions.presentation.nvgarph.NavGraph
-import com.norm.aicameraattractions.presentation.nvgarph.Route
+import com.norm.aicameraattractions.presentation.nvgarph.NewRoute
 import com.norm.aicameraattractions.ui.theme.AiCameraAttractionsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -126,7 +126,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     NavGraph(
-                        startDestination = Route.Navigation.route,
+                        startDestination = NewRoute.Navigation,
                     )
                 }
             }

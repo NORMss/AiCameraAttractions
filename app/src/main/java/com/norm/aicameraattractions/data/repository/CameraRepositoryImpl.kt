@@ -46,10 +46,6 @@ class CameraRepositoryImpl @Inject constructor(
 
                     onPhotoCaptured(imageBitmap)
                     image.close()
-
-//                    CoroutineScope(Dispatchers.IO).launch {
-//                        Log.d("MyLog", savePhoto(imageBitmap).toString())
-//                    }
                 }
             }
         )

@@ -9,20 +9,17 @@ import com.norm.aicameraattractions.presentation.navigator.Navigator
 
 @Composable
 fun NavGraph(
-    startDestination: String,
+    startDestination: NewRoute,
 ) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = startDestination,
     ) {
-        navigation(
-            route = Route.Navigation.route,
-            startDestination = Route.NavigatorScreen.route,
+        navigation<NewRoute.Navigation>(
+            startDestination = NewRoute.NavigatorScreen,
         ) {
-            composable(
-                route = Route.NavigatorScreen.route,
-            ) {
+            composable<NewRoute.NavigatorScreen> {
                 Navigator()
             }
         }
