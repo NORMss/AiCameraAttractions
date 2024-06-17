@@ -1,6 +1,7 @@
 package com.norm.aicameraattractions.presentation.navigator
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,18 +20,18 @@ import com.norm.aicameraattractions.presentation.detail.DetailsViewModel
 import com.norm.aicameraattractions.presentation.gallery.GalleryScreen
 import com.norm.aicameraattractions.presentation.gallery.GalleryViewModel
 import com.norm.aicameraattractions.presentation.nvgarph.NewRoute
-import com.norm.aicameraattractions.presentation.nvgarph.Route
 
 @Composable
 fun Navigator() {
     val navController = rememberNavController()
+    Log.d("MyLog", "Navigator")
     NavHost(
         navController = navController,
         startDestination = NewRoute.GalleryScreen,
         modifier = Modifier
             .fillMaxSize(),
     ) {
-        composable<Route.DetailsScreen> { backStackEntry ->
+        composable<NewRoute.DetailsScreen> { backStackEntry ->
             val viewModel = hiltViewModel<DetailsViewModel>()
             val state = viewModel.state.collectAsState().value
 //            navController.previousBackStackEntry?.savedStateHandle?.get<Uri>("image")
@@ -130,12 +131,12 @@ private fun navigateToScreens(
     }
 }
 
-private fun navigateToDetails(
-    navController: NavController,
-    uri: Uri,
-) {
-    navController.currentBackStackEntry?.savedStateHandle?.set("image", uri)
-    navController.navigate(
-        route = Route.DetailsScreen.route
-    )
-}
+//private fun navigateToDetails(
+//    navController: NavController,
+//    uri: Uri,
+//) {
+//    navController.currentBackStackEntry?.savedStateHandle?.set("image", uri)
+//    navController.navigate(
+//        route = Route.DetailsScreen.route
+//    )
+//}

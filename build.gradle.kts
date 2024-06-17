@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.compose.compiler) apply false
-    alias(libs.plugins.serialization)
+//    alias(libs.plugins.serialization)
 //    kotlin("plugin.serialization") version "2.0.0"
 //    alias(libs.plugins.jvm) apply false
 }
