@@ -44,7 +44,7 @@ import com.norm.aicameraattractions.presentation.large_rounded
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.size_box_camera_button
 import com.norm.aicameraattractions.presentation.size_icon_camera_button
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 
 @Composable
 fun CameraScreen(
@@ -168,7 +168,7 @@ fun CameraScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.width(smale_padding))
+            Spacer(modifier = Modifier.width(small_padding))
 
             Box(
                 modifier = Modifier
@@ -194,7 +194,7 @@ fun CameraScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.width(smale_padding))
+            Spacer(modifier = Modifier.width(small_padding))
 
             Box(
                 modifier = Modifier

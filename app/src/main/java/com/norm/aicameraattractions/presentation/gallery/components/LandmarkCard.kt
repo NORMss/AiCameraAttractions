@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
 import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 
 @Composable
 fun LandmarkCard(
@@ -49,7 +49,7 @@ fun LandmarkCard(
                 .background(
                     color = MaterialTheme.colorScheme.secondaryContainer
                 )
-                .padding(horizontal = smale_padding),
+                .padding(horizontal = small_padding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(

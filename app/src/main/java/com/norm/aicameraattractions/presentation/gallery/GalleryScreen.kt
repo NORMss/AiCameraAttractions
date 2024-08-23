@@ -40,7 +40,7 @@ import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.gallery.components.ItemSearchResult
 import com.norm.aicameraattractions.presentation.gallery.components.LandmarkList
 import com.norm.aicameraattractions.presentation.medium_padding
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 
 @Composable
 fun GalleryScreen(
@@ -129,10 +129,10 @@ fun GalleryScreen(
             ) {
                 LazyColumn(
                     contentPadding = PaddingValues(
-                        vertical = smale_padding,
+                        vertical = small_padding,
                         horizontal = medium_padding,
                     ),
-                    verticalArrangement = Arrangement.spacedBy(smale_padding),
+                    verticalArrangement = Arrangement.spacedBy(small_padding),
                 ) {
                     items(landmarks) { landmark ->
                         ItemSearchResult(
@@ -152,7 +152,7 @@ fun GalleryScreen(
                         state = rememberScrollState(),
                     ),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(smale_padding),
+                horizontalArrangement = Arrangement.spacedBy(small_padding),
             ) {
                 state.filterRegionMap.forEach {
                     FilterChip(

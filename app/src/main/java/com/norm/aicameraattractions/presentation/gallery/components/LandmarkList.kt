@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_rounded
 import com.norm.aicameraattractions.presentation.min_size_width_column
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 import kotlinx.coroutines.delay
 
 @Composable
@@ -56,9 +56,9 @@ fun LandmarkList(
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Adaptive(min_size_width_column),
             modifier = modifier,
-            contentPadding = PaddingValues(smale_padding),
-            horizontalArrangement = Arrangement.spacedBy(smale_padding),
-            verticalItemSpacing = smale_padding,
+            contentPadding = PaddingValues(small_padding),
+            horizontalArrangement = Arrangement.spacedBy(small_padding),
+            verticalItemSpacing = small_padding,
         ) {
             items(landmarks) { item ->
                 LandmarkCard(
@@ -79,9 +79,9 @@ private fun ShimmerLandmarkList(
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Adaptive(min_size_width_column),
         modifier = modifier,
-        contentPadding = PaddingValues(smale_padding),
-        horizontalArrangement = Arrangement.spacedBy(smale_padding),
-        verticalItemSpacing = smale_padding,
+        contentPadding = PaddingValues(small_padding),
+        horizontalArrangement = Arrangement.spacedBy(small_padding),
+        verticalItemSpacing = small_padding,
     ) {
         items(12) {
             Box(

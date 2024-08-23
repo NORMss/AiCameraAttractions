@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 
 @Composable
 fun EmptyLandmarksList(
@@ -30,7 +30,7 @@ fun EmptyLandmarksList(
                 contentDescription = "NoPhotography",
             )
             Spacer(
-                modifier = Modifier.height(smale_padding),
+                modifier = Modifier.height(small_padding),
             )
             Text(
                 text = "Gallery empty\nTake first photo",

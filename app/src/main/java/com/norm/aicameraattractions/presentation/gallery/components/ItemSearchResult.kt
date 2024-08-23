@@ -20,8 +20,8 @@ import coil.compose.AsyncImage
 import com.norm.aicameraattractions.domain.model.Landmark
 import com.norm.aicameraattractions.presentation.medium_padding
 import com.norm.aicameraattractions.presentation.medium_rounded
-import com.norm.aicameraattractions.presentation.smale_image
-import com.norm.aicameraattractions.presentation.smale_rounded
+import com.norm.aicameraattractions.presentation.small_image
+import com.norm.aicameraattractions.presentation.small_rounded
 
 @Composable
 fun ItemSearchResult(
@@ -63,8 +63,8 @@ fun ItemSearchResult(
                 model = landmark.imagePath,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(smale_image)
-                    .clip(RoundedCornerShape(smale_rounded)),
+                    .size(small_image)
+                    .clip(RoundedCornerShape(small_rounded)),
                 contentScale = ContentScale.Crop,
             )
         }

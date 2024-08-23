@@ -31,7 +31,7 @@ import com.norm.aicameraattractions.presentation.gallery.GalleryState
 import com.norm.aicameraattractions.presentation.gallery.components.DownloadButton
 import com.norm.aicameraattractions.presentation.gallery.components.DownloadedButton
 import com.norm.aicameraattractions.presentation.gallery.components.NotDownloadedButton
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -90,7 +90,7 @@ fun RegionSelectorFlowRow(
                 }
             },
         ),
-        horizontalArrangement = Arrangement.spacedBy(smale_padding),
+        horizontalArrangement = Arrangement.spacedBy(small_padding),
     ) { index ->
 //        LaunchedEffect(key1 = regions[index]) {
 //            Toast.makeText(

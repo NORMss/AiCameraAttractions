@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.norm.aicameraattractions.presentation.smale_padding
+import com.norm.aicameraattractions.presentation.small_padding
 
 
 @Composable
@@ -71,7 +71,7 @@ fun DownloadButton(
             text = text,
         )
         Spacer(
-            modifier = Modifier.width(smale_padding)
+            modifier = Modifier.width(small_padding)
         )
         CircularProgressIndicator(
             modifier = Modifier
