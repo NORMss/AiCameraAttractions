@@ -7,6 +7,7 @@ import com.norm.aicameraattractions.data.local.LandmarkDao
 import com.norm.aicameraattractions.data.local.LandmarkDatabase
 import com.norm.aicameraattractions.data.local.UriTypeConverter
 import com.norm.aicameraattractions.data.remote.AndroidDownloader
+import com.norm.aicameraattractions.data.remote.OpenAiApi
 import com.norm.aicameraattractions.data.repository.CameraRepositoryImpl
 import com.norm.aicameraattractions.data.repository.LandmarkRepositoryImpl
 import com.norm.aicameraattractions.domain.remote.Downloader
@@ -26,6 +27,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -93,5 +97,15 @@ object AppModule {
         @ApplicationContext context: Context,
     ): Downloader {
         return AndroidDownloader(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOpenAiApi(): OpenAiApi(){
+        return Retrofit.Builder()
+            .baseUrl(OpenAiApi.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create()
     }
 }
