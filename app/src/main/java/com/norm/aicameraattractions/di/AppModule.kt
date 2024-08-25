@@ -13,6 +13,7 @@ import com.norm.aicameraattractions.data.repository.LandmarkRepositoryImpl
 import com.norm.aicameraattractions.domain.remote.Downloader
 import com.norm.aicameraattractions.domain.repository.CameraRepository
 import com.norm.aicameraattractions.domain.repository.LandmarkRepository
+import com.norm.aicameraattractions.domain.repository.OpenAiRepository
 import com.norm.aicameraattractions.domain.usecases.camerausecases.CameraUseCases
 import com.norm.aicameraattractions.domain.usecases.camerausecases.SavePhoto
 import com.norm.aicameraattractions.domain.usecases.camerausecases.TakePhoto
@@ -21,6 +22,8 @@ import com.norm.aicameraattractions.domain.usecases.landmarkusecases.LandmarkUse
 import com.norm.aicameraattractions.domain.usecases.landmarkusecases.SelectLandmark
 import com.norm.aicameraattractions.domain.usecases.landmarkusecases.SelectLandmarks
 import com.norm.aicameraattractions.domain.usecases.landmarkusecases.UpsertLandmark
+import com.norm.aicameraattractions.domain.usecases.openaiusecases.GetChatCompletion
+import com.norm.aicameraattractions.domain.usecases.openaiusecases.OpenAiUseCases
 import com.norm.aicameraattractions.util.LANDMARKS_DB_NAME
 import dagger.Module
 import dagger.Provides
@@ -93,6 +96,16 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideOpenAiUseCases(
+        openAiRepository: OpenAiRepository,
+    ): OpenAiUseCases {
+        return OpenAiUseCases(
+            getChatCompletion = GetChatCompletion(openAiRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
     fun provideDownloader(
         @ApplicationContext context: Context,
     ): Downloader {
@@ -101,7 +114,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOpenAiApi(): OpenAiApi(){
+    fun provideOpenAiApi(): OpenAiApi {
         return Retrofit.Builder()
             .baseUrl(OpenAiApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
