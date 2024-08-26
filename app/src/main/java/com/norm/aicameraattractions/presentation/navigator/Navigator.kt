@@ -43,6 +43,8 @@ fun Navigator() {
             }
             DetailsScreen(
                 landmark = state.selectLandmark ?: Landmark(Uri.parse(""), "", ""),
+                messages = state.messages,
+                isSending = false,
                 onBackClick = {
                     navController.navigateUp()
                 },
@@ -52,7 +54,10 @@ fun Navigator() {
                 },
                 onShareClick = {
 
-                }
+                },
+                onGetInfo = {
+                    viewModel.getLandmarkInfoWithOpenAi()
+                },
             )
         }
         composable<NewRoute.GalleryScreen> {

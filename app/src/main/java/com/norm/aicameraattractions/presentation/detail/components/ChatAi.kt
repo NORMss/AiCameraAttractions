@@ -35,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import com.norm.aicameraattractions.domain.model.Message
 import com.norm.aicameraattractions.presentation.large_rounded
 import com.norm.aicameraattractions.presentation.max_width_messagebox
 import com.norm.aicameraattractions.presentation.medium_alpha
@@ -48,12 +49,12 @@ import com.norm.aicameraattractions.presentation.very_small_padding
 fun ChatAi(
     modifier: Modifier = Modifier,
     text: String = "",
-    messages: List<String>,
+    messages: List<Message>,
     isSending: Boolean,
     onSendContent: (String) -> Unit,
 ) {
     var content by remember {
-        mutableStateOf(text)
+        mutableStateOf("")
     }
     Column(
         modifier = modifier,
@@ -71,10 +72,10 @@ fun ChatAi(
                         .fillMaxSize()
                 ) {
                     MessageBox(
-                        message = message,
+                        message = message.content,
                         modifier = Modifier
                             .align(
-                                if (message.isNotEmpty()) Alignment.End else Alignment.Start
+                                if (message.content.isNotEmpty()) Alignment.End else Alignment.Start
                             )
                     )
                     Spacer(
@@ -277,4 +278,21 @@ private fun PreviewChatAiText() {
     )
 }
 
-val messagesTest = listOf("Hello, Android!", "Hello, Chat!", "Hello, World!", "Hello, Google!")
+val messagesTest = listOf(
+    Message(
+        role = "User",
+        content = "Hello, Android!",
+    ),
+    Message(
+        role = "ChatAi",
+        content = "Hello, Chat!",
+    ),
+    Message(
+        role = "User",
+        content = "Hello, World!",
+    ),
+    Message(
+        role = "User",
+        content = "Hello, Google!",
+    ),
+)
